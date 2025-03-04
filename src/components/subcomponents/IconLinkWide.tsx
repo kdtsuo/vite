@@ -33,7 +33,7 @@ export default function IconLinkWide({
     >
       {Icon && <Icon strokeWidth={2} size={30} />}
       {image && <img src={image} alt={label} className="w-10 h-auto" />}
-      <h1 className="mx-2 text-lg ">{label}</h1>
+      <h1 className="mx-2 text-lg">{label}</h1>
       <ChevronRight
         className="t200e opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-0"
         strokeWidth={2}

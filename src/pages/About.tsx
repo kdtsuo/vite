@@ -2,7 +2,7 @@ import teamphoto from "../assets/img/stock/teamphoto.jpeg";
 
 export default function About() {
   return (
-    <div className="flex flex-wrap lg:flex-nowrap items-center justify-center h-auto">
+    <div className="animate-fade-in flex flex-wrap lg:flex-nowrap items-center justify-center h-auto">
       <div className="w-screen h-screen relative overflow-hidden ">
         <img
           className="absolute inset-0 object-cover w-full h-full brightness-[0.5]"

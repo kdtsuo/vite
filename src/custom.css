@@ -40,4 +40,15 @@
   --drop-shadow-box: 1px 6px 6px rgba(0, 0, 0, 0.25);
   --drop-shadow-3xl: 0 35px 35px rgba(0, 0, 0, 0.35);
   --drop-shadow-4xl: 0 45px 65px rgba(0, 0, 0, 0.45);
+
+  --animate-fade-in: fadeIn 0.5s ease-in-out forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
