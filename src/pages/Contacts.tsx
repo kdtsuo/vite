@@ -106,14 +106,14 @@ export default function Contacts() {
       title: "Discord",
     },
     {
-      icon: githublogo,
-      href: "https://github.com/kdtsuo/kdtsuo.github.io-vite",
-      title: "GitHub",
-    },
-    {
       icon: instagramlogo,
       href: "https://www.instagram.com/kdt.suo/?theme=dark",
       title: "Instagram",
+    },
+    {
+      icon: githublogo,
+      href: "https://github.com/kdtsuo/kdtsuo.github.io-vite",
+      title: "GitHub",
     },
     {
       icon: maillogo,
