@@ -42,7 +42,10 @@ export default function Discover() {
   ];
 
   return (
-    <div className="bg-slate-800 text-white text-center py-10">
+    <div
+      className="bg-slate-800 text-white text-center py-10 
+    bg-[radial-gradient(#ffffff25_1px,transparent_1px)] [background-size:40px_40px]"
+    >
       <h1 className="text-4xl font-bold mb-6">Discover More</h1>
       {/* Cards Container */}
       <div className="flex justify-center gap-6 flex-wrap mx-5">
