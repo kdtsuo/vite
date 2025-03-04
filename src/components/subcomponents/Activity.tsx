@@ -1,13 +1,23 @@
+import React from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
+
 interface ActivityProps {
-  image: string;
+  images: string[];
   title: string;
   text: string;
   reverse: boolean;
-  isLast?: boolean; // New prop to determine if it's the last element
+  isLast?: boolean;
 }
 
 export default function Activity({
-  image,
+  images,
   title,
   text,
   reverse,
@@ -19,15 +29,29 @@ export default function Activity({
         className={`flex flex-col ${
           reverse ? "lg:flex-row-reverse" : "lg:flex-row"
         } 
-        w-full justify-center items-center md:space-x-4  overflow-hidden`}
+        w-full justify-center items-center md:space-x-4 overflow-hidden`}
       >
-        <div className="w-full lg:w-1/2 flex justify-center pb-8">
-          <img
-            className="w-11/12 lg:w-5/6 h-auto rounded-xl shadow-lg 
-                    t200e hover:scale-105 object-cover m-2"
-            src={image}
-            alt={title}
-          />
+        <div className="w-full lg:w-1/2 flex justify-center py-6 px-10">
+          <Carousel className="w-11/12 lg:w-5/6">
+            <CarouselContent>
+              {images.map((img, index) => (
+                <CarouselItem key={index}>
+                  <Card className="w-full h-full">
+                    <CardContent className="flex aspect-video items-center justify-center p-0">
+                      <img
+                        className="w-full h-full rounded-xl shadow-lg object-cover 
+                        transition-transform duration-200 hover:scale-105"
+                        src={img}
+                        alt={`${title} image`}
+                      />
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="text-white" />
+            <CarouselNext className="text-white" />
+          </Carousel>
         </div>
         <div
           className="w-11/12 lg:w-1/2 p-6 bg-slate-800 backdrop-blur-sm rounded-xl shadow-lg max-w-lg 

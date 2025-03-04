@@ -80,7 +80,7 @@ export default function Navbar() {
           </Link>
 
           {/* Navigation Links */}
-          <div className="hidden md:flex space-x-6">{links}</div>
+          <div className="hidden md:flex space-x-6 text-xl">{links}</div>
 
           {/* Mobile Menu Button using Sheet from shadcn */}
           <div className="">
@@ -99,7 +99,7 @@ export default function Navbar() {
                     className="w-28 h-auto mx-auto"
                   />
                 </SheetHeader>
-                <div className="flex flex-col items-center justify-center space-y-4 mt-8">
+                <div className="flex flex-col items-center justify-center space-y-6 text-3xl">
                   {links}
                 </div>
                 <SheetFooter className="w-full flex justify-center mt-8">
