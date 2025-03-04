@@ -16,7 +16,7 @@ export default function Navbar() {
       <div key={item}>
         <Link
           to={path}
-          className={`navbar-link t200e   ${isActive ? "bg-lb-300 " : ""}`}
+          className={`navbar-link t200e   ${isActive ? "bg-lb-500" : ""}`}
         >
           {item}
         </Link>
