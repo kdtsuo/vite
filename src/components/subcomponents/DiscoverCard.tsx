@@ -27,9 +27,11 @@ export default function DiscoverCard({
       }`}
     >
       <div
-        className="absolute inset-0 bg-cover bg-center brightness-25 group-hover:brightness-50 t200e"
+        className="absolute inset-0 bg-cover bg-center t200e"
         style={{ backgroundImage: `url(${image})` }}
       ></div>
+      {/*  */}
+      <div className="absolute inset-0 bg-cover bg-center bg-black opacity-75 group-hover:opacity-60 t200e"></div>
 
       {/* Dot pattern overlay - only visible on hover */}
       <div
@@ -40,14 +42,10 @@ export default function DiscoverCard({
         }}
       ></div>
 
-      <div className="relative p-6 text-white h-auto flex flex-col items-center justify-center text-center z-10">
-        <div className="flex justify-center items-center space-x-2">
-          {Icon && <Icon size={30} strokeWidth={2} />}
-          <h3 className="text-2xl md:text-3xl font-bold">{title}</h3>
-        </div>
-        <p className="text-md md:text-xl mt-2 text-gray-200 t200e">
-          {description}
-        </p>
+      <div className="font-extralight relative p-6 text-white h-auto flex flex-col items-center justify-center text-center z-10">
+        {Icon && <Icon size={30} strokeWidth={2} />}
+        <h3 className="text-2xl md:text-3xl font-bold">{title}</h3>
+        <p className="text-md md:text-xl text-gray-200 t200e">{description}</p>
       </div>
     </a>
   );
