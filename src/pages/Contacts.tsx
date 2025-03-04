@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 import emailjs from "emailjs-com";
+import Footer from "@/components/Footer";
 
 // Define schema for form validation
 const formSchema = z.object({
@@ -116,121 +117,128 @@ export default function Contacts() {
   ];
 
   return (
-    <div
-      className="bg-lb-100 h-auto lg:h-screen w-full flex items-center justify-center pt-40 pb-20 lg:py-10
-      bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"
-    >
+    <div>
       <div
-        className="m-5 w-full max-w-6xl bg-white shadow-xl rounded-xl overflow-hidden 
-        flex flex-col lg:flex-row relative "
+        className="bg-lb-100 h-auto lg:h-screen w-full flex items-center justify-center pt-40 pb-20 lg:py-10
+      bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"
       >
-        {/* Social Media Cards Section */}
-        <div className="w-full lg:w-1/3 flex flex-col justify-center items-center p-12 py-6 lg:py-12">
-          <div className="w-full flex-grow justify-center flex flex-col py-8 space-y-2">
-            <h2 className="text-3xl font-bold text-center pb-2">
-              Connect With Us
-            </h2>
-            {socialLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
+        <div
+          className="m-5 w-full max-w-6xl bg-white shadow-xl rounded-xl overflow-hidden 
+        flex flex-col lg:flex-row relative "
+        >
+          {/* Social Media Cards Section */}
+          <div className="w-full lg:w-1/3 flex flex-col justify-center items-center p-12 py-6 lg:py-12">
+            <div className="w-full flex-grow justify-center flex flex-col py-8 space-y-2">
+              <h2 className="text-3xl font-bold text-center pb-2">
+                Connect With Us
+              </h2>
+              {socialLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Card className="hover:shadow-lg transition-all duration-200 hover:-translate-y-1 bg-black text-white">
+                    <CardHeader className="flex flex-row items-center justify-between lg:justify-start space-x-4 p-4">
+                      <img
+                        src={link.icon}
+                        alt={link.title}
+                        className="w-12 h-12"
+                      />
+                      <CardTitle className="text-xl font-extralight">
+                        {link.title}
+                      </CardTitle>
+                    </CardHeader>
+                  </Card>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Divider Line */}
+          <div className="hidden lg:block absolute left-1/3 top-0 bottom-0 w-0.5 bg-gray-300 my-8"></div>
+          <div className="block lg:hidden w-full h-0.5 bg-gray-300 my-4"></div>
+
+          {/* Contact Form Section */}
+          <div className="w-full lg:w-2/3 p-12">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
               >
-                <Card className="hover:shadow-lg transition-all duration-200 hover:-translate-y-1 bg-black text-white">
-                  <CardHeader className="flex flex-row items-center justify-between lg:justify-start space-x-4 p-4">
-                    <img
-                      src={link.icon}
-                      alt={link.title}
-                      className="w-12 h-12"
-                    />
-                    <CardTitle className="text-xl font-extralight">
-                      {link.title}
-                    </CardTitle>
-                  </CardHeader>
-                </Card>
-              </a>
-            ))}
+                <h2 className="text-3xl font-bold text-center mb-6">
+                  Directly Contact Us
+                </h2>
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xl">Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Your name"
+                          className="text-gray-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xl">Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="your.email@example.com"
+                          className="text-gray-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-xl">Message</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Your message..."
+                          className="min-h-32 text-gray-500 resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  type="submit"
+                  className="w-full bg-black hover:bg-slate-500 text-white"
+                >
+                  Send Message
+                </Button>
+              </form>
+            </Form>
           </div>
         </div>
 
-        {/* Divider Line */}
-        <div className="hidden lg:block absolute left-1/3 top-0 bottom-0 w-0.5 bg-gray-300 my-8"></div>
-        <div className="block lg:hidden w-full h-0.5 bg-gray-300 my-4"></div>
-
-        {/* Contact Form Section */}
-        <div className="w-full lg:w-2/3 p-12">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <h2 className="text-3xl font-bold text-center mb-6">
-                Directly Contact Us
-              </h2>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xl">Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Your name"
-                        className="text-gray-500"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xl">Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="your.email@example.com"
-                        className="text-gray-500"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xl">Message</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Your message..."
-                        className="min-h-32 text-gray-500 resize-none"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <Button
-                type="submit"
-                className="w-full bg-black hover:bg-slate-500 text-white"
-              >
-                Send Message
-              </Button>
-            </form>
-          </Form>
-        </div>
+        <Toaster />
       </div>
 
-      <Toaster />
+      <Footer />
     </div>
   );
 }

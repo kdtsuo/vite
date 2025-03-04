@@ -29,8 +29,9 @@ export default function Footer() {
           href="https://www.tsengphoto.ca/"
           target="_blank"
         >
-          Matthew Tseng
+          Tseng Photography
         </a>
+        .
       </p>
     </div>
   );
