@@ -5,7 +5,7 @@
     @apply transition-all duration-200 ease-in-out;
   }
   .navbar-link {
-    @apply px-4 py-2 text-dsg rounded-md text-dsg hover:bg-lb-300 
+    @apply px-4 py-2 text-dsg rounded-md text-white hover:bg-lb-300 
     text-lg font-medium;
   }
 
@@ -14,7 +14,19 @@
   }
 
   .glass {
-    @apply bg-white backdrop-filter backdrop-blur-xl shadow-lg [--bg-opacity:25%];
+    @apply backdrop-filter backdrop-blur-md drop-shadow-lg;
+  }
+
+  .btn {
+    @apply px-2 py-2 text-white bg-dsg rounded-md text-lg font-medium;
+  }
+
+  .zoomin-sm {
+    @apply hover:scale-110;
+  }
+
+  .zoomin-md {
+    @apply hover:scale-125;
   }
 }
 
@@ -25,4 +37,7 @@
   --color-lb-400: oklch(75.14% 0.0579 232.56);
   --color-lb-500: oklch(70.14% 0.0579 232.56);
   --color-dsg: oklch(32.51% 0.0291 141.08);
+  --drop-shadow-box: 1px 6px 6px rgba(0, 0, 0, 0.25);
+  --drop-shadow-3xl: 0 35px 35px rgba(0, 0, 0, 0.35);
+  --drop-shadow-4xl: 0 45px 65px rgba(0, 0, 0, 0.45);
 }

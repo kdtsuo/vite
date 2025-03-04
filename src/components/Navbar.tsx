@@ -1,5 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import kdtlogosquare from "../assets/img/kdtlogosquare.png";
+import kdtlogotransparent from "../assets/img/kdtlogotransparent.png";
+import IconButton from "./subcomponents/IconButton";
+import { Menu } from "lucide-react";
 
 export default function Navbar() {
   const { pathname } = useLocation();
@@ -22,19 +24,34 @@ export default function Navbar() {
     );
   });
 
+  const handleMenuClick = () => {
+    console.log("Menu Clicked");
+  };
+
   return (
-    <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 m-auto bg-lb-100 flex text-dsg shadow-md w-3/4 h-auto glass rounded-full">
+    <nav
+      className="fixed left-1/2 top-0 z-50 mt-4 md:mt-7 flex w-11/12 max-w-7xl -translate-x-1/2 flex-col 
+    items-center rounded-full bg-lb-300/20 p-0 md:p-3 glass"
+    >
       <div className="container mx-auto flex justify-between items-center p-4">
         {/* Logo */}
         <Link to="/">
-          <img src={kdtlogosquare} alt="KDT Logo" className="w-16 h-auto" />
+          <img
+            src={kdtlogotransparent}
+            alt="KDT Logo"
+            className="w-16 h-auto"
+          />
         </Link>
 
         {/* Navigation Links */}
         <div className="hidden md:flex space-x-6">{links}</div>
 
         {/* Mobile Menu Button (Optional) */}
-        <button className="md:hidden p-2 rounded-md bg-gray-800">☰</button>
+        <IconButton
+          icon={Menu}
+          onClick={handleMenuClick}
+          style="cursor-pointer md:hidden text-white drop-shadow-md"
+        />
       </div>
     </nav>
   );
