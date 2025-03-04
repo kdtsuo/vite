@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@layer components {
+  .t200e {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  .navbar-link {
+    @apply px-4 py-2 text-dsg rounded-md text-dsg hover:bg-lb-300 
+    text-lg font-medium;
+  }
+
+  .glass-slate {
+    @apply bg-slate-800 backdrop-filter backdrop-blur-xl shadow-lg;
+  }
+
+  .glass {
+    @apply bg-white backdrop-filter backdrop-blur-xl shadow-lg [--bg-opacity:25%];
+  }
+}
+
+@theme {
+  --color-lb-100: oklch(90.14% 0.0579 232.56);
+  --color-lb-200: oklch(85.14% 0.0579 232.56);
+  --color-lb-300: oklch(80.14% 0.0579 232.56);
+  --color-lb-400: oklch(75.14% 0.0579 232.56);
+  --color-lb-500: oklch(70.14% 0.0579 232.56);
+  --color-dsg: oklch(32.51% 0.0291 141.08);
+}
