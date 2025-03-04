@@ -17,7 +17,7 @@ export default function IconButton({
     <button
       onClick={onClick}
       className={`${label ? "space-x-2 px-2" : "px-4"}
-        px-2 py-2 rounded-md text-lg font-medium flex items-center ${style}`}
+        px-2 py-2 rounded-md text-lg font-medium flex items-center text-white cursor-pointer ${style}`}
       aria-label={label}
     >
       <h1>{label}</h1>
