@@ -5,13 +5,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import bubblewaffle from "@/assets/sponsors/bubblewaffle.png";
 import formosa from "@/assets/sponsors/formosa.png";
 import tossingpizzeria from "@/assets/sponsors/tossingpizzeria.jpeg";
-import macaoimperialtea from "@/assets/sponsors/macaoimperialtea.webp";
+import macaoimperialtea from "@/assets/sponsors/macaoimperialtea.png";
 import seoulful from "@/assets/sponsors/seoulful.png";
-import rubriclogo from "@/assets/img/icons/rubriclogo.png";
 import locationLogo from "@/assets/img/icons/locationlogo.png";
-import newtabLogo from "@/assets/img/icons/newtablogo.png";
-import newtablogoWhite from "@/assets/img/icons/newtablogowhite.png";
-import { SquareArrowOutUpLeft, SquareArrowOutUpRight } from "lucide-react";
+import { SquareArrowOutUpRight } from "lucide-react";
 
 // Define types for sponsors and quick links
 interface SponsorData {
@@ -43,8 +40,7 @@ const Sponsor: React.FC<SponsorProps> = ({
 }) => {
   return (
     <Card
-      className="group relative overflow-hidden gap-0
-      backdrop-blur-sm rounded-xl shadow-lg t200e hover:shadow-xl 
+      className="group relative overflow-hidden gap-0 rounded-xl t200e 
       hover:bg-lb-400 border border-white/10 w-full max-w-md mx-auto p-0"
     >
       {/* Sponsor logo area */}
@@ -55,7 +51,7 @@ const Sponsor: React.FC<SponsorProps> = ({
           rel="noopener noreferrer"
           className="block w-full h-full"
         >
-          <div className="absolute inset-0 flex items-center justify-center p-6 bg-white">
+          <div className="absolute inset-0 flex items-center justify-center p-6 bg-white bg-[radial-gradient(#000000_1px,transparent_1px)] [background-size:30px_30px]">
             <img
               src={image}
               alt={title}
@@ -85,7 +81,7 @@ const Sponsor: React.FC<SponsorProps> = ({
           href={mapLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center mb-4 px-4 py-2 bg-white rounded-full text-black t200e hover:bg-lb-500 mx-auto w-max"
+          className="flex items-center justify-center mb-4 px-4 py-2 bg-white rounded-full text-black t200e hover:bg-lb-200 mx-auto w-max"
         >
           <img src={locationLogo} alt="Location" className="w-4 h-4 mr-2" />
           <span className="text-sm font-medium">{location}</span>
@@ -155,19 +151,12 @@ export default function Sponsors() {
   return (
     <section
       id="sponsors"
-      className="relative overflow-hidden py-16 px-4 bg-lb-100 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"
+      className="relative overflow-hidden px-10 bg-lb-100 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]
+      pt-46"
     >
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-            Thank you to our <span className="text-yellow-200">sponsors</span>!
-          </h2>
-          <div className="w-24 h-1 bg-yellow-200 mx-auto rounded-full mt-4"></div>
-        </div>
-
         {/* Sponsors grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-16">
           {sponsors.map((sponsor, index) => (
             <Sponsor
               key={index}

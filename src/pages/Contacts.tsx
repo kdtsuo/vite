@@ -1,16 +1,9 @@
-import React from "react";
 import discordlogo from "@/assets/img/icons/discordlogo.png";
 import githublogo from "@/assets/img/icons/githublogo.png";
 import instagramlogo from "@/assets/img/icons/instagramlogo.png";
 import maillogo from "@/assets/img/icons/maillogo.png";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormControl,
