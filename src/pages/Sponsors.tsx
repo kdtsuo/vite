@@ -43,7 +43,7 @@ const Sponsor: React.FC<SponsorProps> = ({
 }) => {
   return (
     <Card
-      className="group relative overflow-hidden bg-lb-500 
+      className="group relative overflow-hidden gap-0
       backdrop-blur-sm rounded-xl shadow-lg t200e hover:shadow-xl 
       hover:bg-lb-400 border border-white/10 w-full max-w-md mx-auto p-0"
     >
@@ -71,29 +71,30 @@ const Sponsor: React.FC<SponsorProps> = ({
           href={websiteLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center mb-3 group bg-white "
+          className="inline-flex items-center justify-center mb-3 group"
         >
-          <h2 className="text-2xl font-bold text-black t200e">{title}</h2>
+          <h2 className="text-2xl font-bold text-white t200e group-hover:text-blue-500">
+            {title}
+          </h2>
           <SquareArrowOutUpRight
             size={24}
-            className="w-4 h-4 ml-2 opacity-70 transition-opacity duration-300 "
+            className="w-4 h-4 ml-2 t200e text-white group-hover:text-blue-500"
           />
         </a>
         <a
           href={mapLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center mb-4 px-4 py-2 bg-lb-300 rounded-full text-white/90 transition-all duration-300 hover:bg-lb-200 mx-auto w-max"
+          className="flex items-center justify-center mb-4 px-4 py-2 bg-white rounded-full text-black t200e hover:bg-lb-500 mx-auto w-max"
         >
           <img src={locationLogo} alt="Location" className="w-4 h-4 mr-2" />
           <span className="text-sm font-medium">{location}</span>
-          <img
-            src={newtabLogo}
-            alt="Open map"
-            className="w-3 h-3 ml-2 opacity-70"
+          <SquareArrowOutUpRight
+            size={16}
+            className="w-3 h-3 ml-1 opacity-70"
           />
         </a>
-        <div className="inline-block px-4 py-2 bg-yellow-400/20 rounded-full text-yellow-200 font-medium text-sm">
+        <div className="inline-block px-4 py-2 bg-yellow-400 rounded-full text-black font-medium text-sm">
           {text}
         </div>
       </CardContent>
