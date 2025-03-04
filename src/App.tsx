@@ -5,6 +5,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contacts";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
+import Sponsors from "./pages/Sponsors";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="sponsors" element={<Sponsors />} />
         <Route path="*" element={<NotFound />} /> {/* Catch-all for 404s */}
       </Routes>
     </>
