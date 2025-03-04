@@ -22,6 +22,16 @@ export default function Footer() {
           </a>
         </span>
       </div>
+      <p>
+        All photos are provided by{" "}
+        <a
+          className="underline text-slate-300 hover:text-slate-400 t200e"
+          href="https://www.tsengphoto.ca/"
+          target="_blank"
+        >
+          Matthew Tseng
+        </a>
+      </p>
     </div>
   );
 }

@@ -36,6 +36,10 @@
   --color-lb-300: oklch(80.14% 0.0579 232.56);
   --color-lb-400: oklch(75.14% 0.0579 232.56);
   --color-lb-500: oklch(70.14% 0.0579 232.56);
+  --color-lb-600: oklch(65.14% 0.0579 232.56);
+  --color-lb-700: oklch(60.14% 0.0579 232.56);
+  --color-lb-800: oklch(55.14% 0.0579 232.56);
+  --color-lb-900: oklch(50.14% 0.0579 232.56);
   --color-dsg: oklch(32.51% 0.0291 141.08);
   --drop-shadow-box: 1px 6px 6px rgba(0, 0, 0, 0.25);
   --drop-shadow-3xl: 0 35px 35px rgba(0, 0, 0, 0.35);

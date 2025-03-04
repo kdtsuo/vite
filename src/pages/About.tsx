@@ -1,8 +1,10 @@
+import Activities from "@/components/Activities";
 import teamphoto from "../assets/img/stock/teamphoto.jpeg";
+import Footer from "@/components/Footer";
 
 export default function About() {
   return (
-    <div className="animate-fade-in flex flex-wrap lg:flex-nowrap items-center justify-center h-auto">
+    <div className="animate-fade-in  h-auto">
       <div className="w-screen h-screen relative overflow-hidden ">
         <img
           className="absolute inset-0 object-cover w-full h-full brightness-[0.5]"
@@ -23,6 +25,9 @@ export default function About() {
           </div>
         </div>
       </div>
+      <Activities />
+
+      <Footer />
     </div>
   );
 }

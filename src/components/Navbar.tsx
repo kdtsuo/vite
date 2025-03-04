@@ -2,10 +2,12 @@ import { Link, useLocation } from "react-router-dom";
 import kdtlogotransparent from "../assets/img/kdtlogotransparent.png";
 import IconButton from "./subcomponents/IconButton";
 import { Menu } from "lucide-react";
+import { useState } from "react";
 
 export default function Navbar() {
   const { pathname } = useLocation();
   const items = ["Home", "About", "Contact", "Sponsors"];
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const links = items.map((item) => {
     const path = item.toLowerCase();
@@ -25,7 +27,7 @@ export default function Navbar() {
   });
 
   const handleMenuClick = () => {
-    console.log("Menu Clicked");
+    setMenuOpen(!menuOpen);
   };
 
   return (
@@ -49,9 +51,20 @@ export default function Navbar() {
         {/* Mobile Menu Button (Optional) */}
         <IconButton
           icon={Menu}
-          onClick={handleMenuClick}
-          style="cursor-pointer md:hidden text-white drop-shadow-md"
+          onClick={() => handleMenuClick()}
+          style="cursor-pointer  text-white drop-shadow-md"
         />
+      </div>
+
+      {/* Mobile Menu is hidden by default, when open, it should pop up from the right side, taking at least 3/4 of the screen */}
+      <div
+        className={`fixed top-0 right-0 h-full w-3/4 bg-lb-300/20 transform translate-x-full transition-transform duration-200 ${
+          menuOpen ? "" : ""
+        }`}
+      >
+        <div className="flex flex-col items-center justify-center h-full space-y-4">
+          {links}
+        </div>
       </div>
     </nav>
   );
