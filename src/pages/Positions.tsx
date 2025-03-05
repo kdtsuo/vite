@@ -94,6 +94,12 @@ export default function Positions() {
         "no longer accepting response"
       );
 
+      console.log(
+        `Form status for ${position.label}: ${
+          isAcceptingResponses ? "Open" : "Closed"
+        }`
+      );
+
       return {
         ...position,
         isAcceptingResponses,
@@ -251,8 +257,13 @@ export default function Positions() {
               <DialogFooter>
                 {isLoading && (
                   <div className="flex items-center justify-center">
-                    <span className="text-xs">Checking form status...</span>
-                    <Loader2 className="animate-spin ml-2 " />
+                    <Loader2
+                      size={15}
+                      className="animate-spin mr-2 text-slate-500"
+                    />
+                    <span className="text-xs text-slate-500">
+                      Checking form status...
+                    </span>
                   </div>
                 )}
 
