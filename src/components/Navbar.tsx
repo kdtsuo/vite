@@ -99,7 +99,7 @@ export default function Navbar() {
                     className="w-28 h-auto mx-auto"
                   />
                 </SheetHeader>
-                <div className="flex flex-col items-center justify-center space-y-6 text-3xl">
+                <div className="flex flex-col items-center justify-center space-y-6 text-xl">
                   {links}
                 </div>
                 <SheetFooter className="w-full flex justify-center mt-8">
