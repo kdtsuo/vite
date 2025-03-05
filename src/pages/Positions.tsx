@@ -262,7 +262,7 @@ export default function Positions() {
                       className="animate-spin mr-2 text-slate-500"
                     />
                     <span className="text-xs text-slate-500">
-                      Checking form status...
+                      Checking form for availability...
                     </span>
                   </div>
                 )}
