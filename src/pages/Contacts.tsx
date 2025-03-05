@@ -106,7 +106,7 @@ export default function Contacts() {
     },
     {
       icon: githublogo,
-      href: "https://github.com/kdtsuo/kdtsuo.github.io-vite",
+      href: "https://github.com/kdtsuo/v3",
       title: "GitHub",
     },
     {

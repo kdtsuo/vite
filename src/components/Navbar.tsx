@@ -56,7 +56,7 @@ export default function Navbar() {
       alt: "discord",
     },
     {
-      href: "https://www.github.com/kdtsuo/kdtsuo.github.io",
+      href: "https://www.github.com/kdtsuo/v3",
       imgSrc: githublogo,
       alt: "github",
     },
@@ -83,7 +83,7 @@ export default function Navbar() {
           <div className="hidden md:flex space-x-6 text-xl">{links}</div>
 
           {/* Mobile Menu Button using Sheet from shadcn */}
-          <div className="">
+          <div className="md:hidden">
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <IconButton icon={Menu} style="cursor-pointer drop-shadow-md" />
