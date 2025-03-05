@@ -1,4 +1,5 @@
 import { LucideIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface DiscoverCardProps {
   style?: string;
@@ -20,8 +21,8 @@ export default function DiscoverCard({
   isOpen,
 }: DiscoverCardProps) {
   return (
-    <a
-      href={link}
+    <Link
+      to={link}
       className={`relative rounded-lg overflow-hidden shadow-lg group t200e flex justify-center ${style} ${
         isOpen ? "opacity-100" : "opacity-50"
       }`}
@@ -47,6 +48,6 @@ export default function DiscoverCard({
         <h3 className="text-2xl md:text-3xl font-bold">{title}</h3>
         <p className="text-md md:text-xl text-gray-200 t200e">{description}</p>
       </div>
-    </a>
+    </Link>
   );
 }

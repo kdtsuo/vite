@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <div
+      id="top"
       className="animate-fade-in mx-auto bg-lb-100 h-auto pt-34 md:pt-46 
     bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"
     >
