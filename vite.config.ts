@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/kdtsuo.github.io",
+  base: "/kdtsuo.github.io/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
