@@ -16,7 +16,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="sponsors" element={<Sponsors />} />
+        <Route path="/sponsors" element={<Sponsors />} />
         <Route path="*" element={<NotFound />} /> {/* Catch-all for 404s */}
       </Routes>
     </>
