@@ -18,7 +18,7 @@ import IconLink from "./subcomponents/IconLink";
 
 export default function Navbar() {
   const { pathname } = useLocation();
-  const items = ["Home", "About", "Contacts", "Sponsors"];
+  const items = ["Home", "About", "Positions", "Contacts", "Sponsors"];
   const [open, setOpen] = useState(false);
 
   const links = items.map((item) => {
