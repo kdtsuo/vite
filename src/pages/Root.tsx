@@ -1,5 +1,11 @@
 // redirect to /home
-import { Navigate } from "react-router-dom";
+
+import Home from "./Home";
+
 export default function Root() {
-  return <Navigate to="/home" />;
+  return (
+    <>
+      <Home />
+    </>
+  );
 }
