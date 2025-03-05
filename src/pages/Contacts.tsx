@@ -124,7 +124,7 @@ export default function Contacts() {
       >
         <div
           className="m-5 w-full max-w-6xl bg-white shadow-xl rounded-xl overflow-hidden 
-        flex flex-col lg:flex-row relative "
+        flex flex-col lg:flex-row relative bg-[radial-gradient(#00000025_1px,transparent_1px)] [background-size:30px_30px]"
         >
           {/* Social Media Cards Section */}
           <div className="w-full lg:w-1/3 flex flex-col justify-center items-center p-12 py-6 lg:py-12">
@@ -179,7 +179,7 @@ export default function Contacts() {
                       <FormControl>
                         <Input
                           placeholder="Your name"
-                          className="text-gray-500"
+                          className="text-gray-500 bg-white"
                           {...field}
                         />
                       </FormControl>
@@ -197,7 +197,7 @@ export default function Contacts() {
                       <FormControl>
                         <Input
                           placeholder="your.email@example.com"
-                          className="text-gray-500"
+                          className="text-gray-500 bg-white"
                           {...field}
                         />
                       </FormControl>
@@ -215,7 +215,7 @@ export default function Contacts() {
                       <FormControl>
                         <Textarea
                           placeholder="Your message..."
-                          className="min-h-32 text-gray-500 resize-none"
+                          className="min-h-32 text-gray-500 resize-none  bg-white"
                           {...field}
                         />
                       </FormControl>
