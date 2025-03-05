@@ -41,7 +41,7 @@ const Sponsor: React.FC<SponsorProps> = ({
 }) => {
   return (
     <Card
-      className="group relative overflow-hidden gap-0 rounded-xl t200e 
+      className="group relative overflow-hidden gap-0 rounded-xl t200e animate-fade-in
       hover:bg-lb-400 border border-white/10 w-full max-w-md mx-auto p-0"
     >
       {/* Sponsor logo area */}

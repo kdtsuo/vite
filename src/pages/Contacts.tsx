@@ -21,6 +21,8 @@ import { toast } from "sonner";
 import * as z from "zod";
 import emailjs from "emailjs-com";
 import Footer from "@/components/Footer";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 // Define schema for form validation
 const formSchema = z.object({
@@ -47,6 +49,7 @@ interface SocialLink {
 }
 
 export default function Contacts() {
+  const [isCurrentlySubmitting, setIsCurrentlySubmitting] = useState(false);
   // Define form with React Hook Form and zod validation
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,6 +61,7 @@ export default function Contacts() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsCurrentlySubmitting(true);
     console.log(values);
 
     interface EmailJSTemplateParams {
@@ -73,24 +77,27 @@ export default function Contacts() {
       message: values.message,
     };
 
-    emailjs.send(service, template, templateParams, user).then(
-      (response) => {
-        console.log("SUCCESS!", response.status, response.text);
-        toast.success("Message sent!", {
-          description:
-            "Thank you for your message. We'll get back to you soon.",
-        });
-      },
-      (err) => {
-        console.log("FAILED...", err);
-
-        toast.error("Message failed to send!", {
-          description:
-            "Sorry, we were unable to send your message. Please try again later.",
-        });
-      }
-    );
-    form.reset();
+    try {
+      const response = await emailjs.send(
+        service,
+        template,
+        templateParams,
+        user
+      );
+      console.log("SUCCESS!", response.status, response.text);
+      toast.success("Message sent!", {
+        description: "Thank you for your message. We'll get back to you soon.",
+      });
+      form.reset();
+    } catch (err) {
+      console.log("FAILED...", err);
+      toast.error("Message failed to send!", {
+        description:
+          "Sorry, we were unable to send your message. Please try again later.",
+      });
+    } finally {
+      setIsCurrentlySubmitting(false);
+    }
   };
 
   const socialLinks: SocialLink[] = [
@@ -117,7 +124,7 @@ export default function Contacts() {
   ];
 
   return (
-    <div>
+    <div className="animate-fade-in">
       <div
         className="bg-lb-100 h-auto lg:h-screen w-full flex items-center justify-center pt-40 pb-20 lg:py-10
       bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"
@@ -225,10 +232,14 @@ export default function Contacts() {
                 />
 
                 <Button
+                  disabled={isCurrentlySubmitting}
                   type="submit"
                   className="w-full bg-black hover:bg-slate-500 text-white"
                 >
-                  Send Message
+                  {isCurrentlySubmitting && (
+                    <Loader2 className="animate-spin" />
+                  )}
+                  {isCurrentlySubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </Form>
