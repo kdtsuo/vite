@@ -7,12 +7,12 @@ export default function Footer() {
   };
   return (
     <div
-      className="bg-slate-900 text-white p-4
+      className="bg-slate-900 text-slate-200 p-4
         flex flex-col items-center justify-center space-y-2
         text-center"
     >
       <div className="text-lg font-bold">
-        &copy; KDT ("KPop Dance Team") {getYear()}
+        &copy; {getYear()} KDT ("KPop Dance Team")
       </div>
       <div className="text-sm flex items-center justify-center space-x-2">
         <p>Made with ❤️ by</p>
