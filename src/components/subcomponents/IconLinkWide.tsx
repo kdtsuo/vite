@@ -1,4 +1,4 @@
-import { ChevronRight, LucideIcon, X } from "lucide-react";
+import { ChevronRight, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   AlertDialog,
@@ -13,10 +13,10 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { toast, Toaster } from "sonner";
+import iconMap from "@/utils/iconMap";
 
 interface IconLinkWideProps {
-  icon?: LucideIcon;
-  image?: string;
+  iconType?: string; // Now accepts a string identifier instead of direct icon/image
   label: string;
   link: string;
   style?: string;
@@ -25,8 +25,7 @@ interface IconLinkWideProps {
 }
 
 export default function IconLinkWide({
-  icon: Icon,
-  image,
+  iconType,
   label,
   link,
   style,
@@ -45,6 +44,11 @@ export default function IconLinkWide({
 
     toast.success(`Deleted link: ${label}`);
   };
+
+  // Get icon or image from the map based on iconType
+  const iconDetails = iconType ? iconMap[iconType] : undefined;
+  const Icon = iconDetails?.iconComponent;
+  const imagePath = iconDetails?.imagePath;
 
   return (
     <div className="flex items-center justify-center">
@@ -87,7 +91,9 @@ export default function IconLinkWide({
         className={`h-20 t200e flex flex-grow items-center justify-between gap-2 p-4 rounded-xl text-lg font-medium group ${style}`}
       >
         {Icon && <Icon strokeWidth={2} size={30} />}
-        {image && <img src={image} alt={label} className="w-10 h-auto" />}
+        {imagePath && (
+          <img src={imagePath} alt={label} className="w-10 h-auto" />
+        )}
         <h1 className="mx-2 text-lg">{label}</h1>
         <ChevronRight
           className="t200e opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-0"
