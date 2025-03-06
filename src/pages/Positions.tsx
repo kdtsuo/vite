@@ -8,6 +8,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogClose,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -20,7 +21,6 @@ import {
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import { toast, Toaster } from "sonner";
-import { DialogClose } from "@radix-ui/react-dialog";
 
 type Position = {
   value: string;

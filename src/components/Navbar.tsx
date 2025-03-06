@@ -113,7 +113,7 @@ function LoginDialog() {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={loading}>
+            <Button type="submit" className="cursor-pointer" disabled={loading}>
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -135,6 +135,7 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const items = ["Home", "About", "Positions", "Contacts", "Sponsors"];
   const [open, setOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const links = items.map((item) => {
     const path = item.toLowerCase();
@@ -153,6 +154,22 @@ export default function Navbar() {
       </div>
     );
   });
+  const handleSignOut = async () => {
+    try {
+      setIsLoggingOut(true);
+      await signOut();
+      toast.success("Logged out successfully", {
+        duration: 3000,
+      });
+    } catch (error) {
+      console.error("Error signing out:", error);
+      toast.error("Failed to log out. Please try again.", {
+        duration: 3000,
+      });
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
 
   const authSection = user ? (
     <div className="flex flex-col items-center space-y-2">
@@ -162,21 +179,25 @@ export default function Navbar() {
       <Button
         size="sm"
         variant="outline"
-        onClick={() => {
-          signOut();
-          toast.success("Logged out successfully", {
-            duration: 3000,
-          });
-        }}
+        onClick={handleSignOut}
         className="cursor-pointer"
+        disabled={isLoggingOut}
       >
-        <LogOut size={24} /> Logout
+        {isLoggingOut ? (
+          <>
+            <Loader2 size={16} className="mr-2 animate-spin" />
+            Logging out...
+          </>
+        ) : (
+          <>
+            <LogOut size={24} /> Logout
+          </>
+        )}
       </Button>
     </div>
   ) : (
     <LoginDialog />
   );
-
   const linkIcons = [
     {
       href: "https://www.instagram.com/kdt.suo/?theme=dark",
