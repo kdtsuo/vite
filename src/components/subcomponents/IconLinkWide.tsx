@@ -54,7 +54,7 @@ export default function IconLinkWide({
             <Button
               size="icon"
               variant={"secondary"}
-              className="size-8 rounded-full p-0 mr-3 lg:mr-16 cursor-pointer"
+              className="size-8 rounded-full p-0 mr-3 cursor-pointer"
             >
               <X size={14} />
             </Button>
@@ -84,7 +84,7 @@ export default function IconLinkWide({
       <a
         href={link}
         target="_blank"
-        className={`h-20 t200e flex flex-grow items-center justify-between gap-2 p-4 rounded-xl text-lg font-medium group lg:zoomin-sm ${style}`}
+        className={`h-20 t200e flex flex-grow items-center justify-between gap-2 p-4 rounded-xl text-lg font-medium group ${style}`}
       >
         {Icon && <Icon strokeWidth={2} size={30} />}
         {image && <img src={image} alt={label} className="w-10 h-auto" />}
