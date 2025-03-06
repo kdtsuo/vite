@@ -88,7 +88,8 @@ export default function Navbar() {
               <SheetTrigger asChild>
                 <IconButton
                   icon={Menu}
-                  className="cursor-pointer drop-shadow-md"
+                  size={40}
+                  className="cursor-pointer drop-shadow-md text-white"
                 />
               </SheetTrigger>
               <SheetContent

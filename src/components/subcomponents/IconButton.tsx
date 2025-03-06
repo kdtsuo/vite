@@ -4,18 +4,19 @@ import { forwardRef, ButtonHTMLAttributes } from "react";
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: LucideIcon;
   label?: string;
+  size?: number;
   className?: string; // Renamed from style to className
 }
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ icon: Icon, label, className, ...props }, ref) => {
+  ({ icon: Icon, label, size, className, ...props }, ref) => {
     return (
       <button
         ref={ref}
         className={`flex items-center gap-2 p-2 rounded ${className || ""}`}
         {...props}
       >
-        <Icon size={20} />
+        <Icon size={size} />
         {label && <span>{label}</span>}
       </button>
     );
