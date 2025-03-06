@@ -107,11 +107,11 @@ export default function QuickLinks({ style }: QuickLinksProps) {
         throw error;
       }
 
-      if (data) {
-        // Process data to handle missing user_id
+      if (data && data.length > 0) {
+        // Only use database data if there are records
         setLinks(data);
       } else {
-        // No links returned, use fallback links
+        // No links returned or empty array, use fallback links
         setLinks(fallbackLinks);
       }
     } catch (error) {
@@ -120,6 +120,41 @@ export default function QuickLinks({ style }: QuickLinksProps) {
       setLinks(fallbackLinks);
     } finally {
       setLoading(false);
+    }
+  }
+
+  // Function to delete a link
+  async function deleteLink(id: number, label: string) {
+    try {
+      // Get current user
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        toast.error("You must be logged in to delete links");
+        return;
+      }
+
+      const { error } = await supabase.from("links").delete().eq("id", id);
+
+      if (error) {
+        throw error;
+      }
+
+      const updatedLinks = links.filter((link) => link.id !== id);
+
+      // If we deleted the last database link, show fallback links
+      if (updatedLinks.length === 0) {
+        setLinks(fallbackLinks);
+      } else {
+        setLinks(updatedLinks);
+      }
+
+      toast.success(`Deleted link: ${label}`);
+    } catch (error) {
+      toast.error("Failed to delete link");
+      console.error("Error deleting link: ", error);
     }
   }
 
@@ -175,33 +210,6 @@ export default function QuickLinks({ style }: QuickLinksProps) {
     } catch (error) {
       toast.error("Failed to add link");
       console.error("Error adding link: ", error);
-    }
-  }
-
-  // Function to delete a link
-  async function deleteLink(id: number, label: string) {
-    try {
-      // Get current user
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (!user) {
-        toast.error("You must be logged in to delete links");
-        return;
-      }
-
-      const { error } = await supabase.from("links").delete().eq("id", id);
-
-      if (error) {
-        throw error;
-      }
-
-      setLinks(links.filter((link) => link.id !== id));
-      toast.success(`Deleted link: ${label}`);
-    } catch (error) {
-      toast.error("Failed to delete link");
-      console.error("Error deleting link: ", error);
     }
   }
 
