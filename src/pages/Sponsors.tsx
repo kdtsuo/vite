@@ -541,8 +541,9 @@ export default function Sponsors() {
     <div>
       <section
         id="sponsors"
-        className="relative overflow-hidden px-10 bg-lb-100 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]
-        pt-46"
+        className="relative overflow-hidden px-10 
+        bg-lb-100 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]
+        pt-30 md:pt-46"
       >
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Admin section for logged in users */}
