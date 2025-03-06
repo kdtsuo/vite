@@ -1,5 +1,5 @@
 import IconLinkWide from "@/components/subcomponents/IconLinkWide";
-import { ListPlus } from "lucide-react";
+import { ListPlus, Loader2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   Dialog,
@@ -50,6 +50,38 @@ interface Link {
   isOpen: boolean;
   date: string;
 }
+// Define fallback links to display when no links are available
+const fallbackLinks: Link[] = [
+  {
+    iconType: "rubric",
+    label: "Merch",
+    link: "https://campus.hellorubric.com/?s=7805",
+    isOpen: true,
+    date: "2024-10-31",
+  },
+  {
+    iconType: "rubric",
+    label: "Membership & Ticket Sales",
+    link: "https://campus.hellorubric.com/?s=7805",
+    isOpen: true,
+    date: "2024-10-31",
+  },
+  {
+    iconType: "googleForms",
+    label: "Google Forms",
+    link: "https://forms.gle/yVZcBeKBWPCm235aA",
+    isOpen: true,
+    date: "2024-10-31",
+  },
+
+  {
+    iconType: "discord",
+    label: "Discord Server",
+    link: "https://discord.com/invite/tbKkvjV2W8",
+    isOpen: true,
+    date: "2024-10-31",
+  },
+];
 
 export default function QuickLinks({ style }: QuickLinksProps) {
   const [open, setOpen] = useState(false);
@@ -78,10 +110,14 @@ export default function QuickLinks({ style }: QuickLinksProps) {
       if (data) {
         // Process data to handle missing user_id
         setLinks(data);
+      } else {
+        // No links returned, use fallback links
+        setLinks(fallbackLinks);
       }
     } catch (error) {
-      toast.error("Failed to load links");
+      toast.error("Failed to load links from database");
       console.error("Error loading links: ", error);
+      setLinks(fallbackLinks);
     } finally {
       setLoading(false);
     }
@@ -304,7 +340,7 @@ export default function QuickLinks({ style }: QuickLinksProps) {
 
       {loading ? (
         <div className="flex justify-center py-8">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-700"></div>
+          <Loader2 className="animate-spin rounded-full h-12 w-12 text-gray-700" />
         </div>
       ) : (
         links.map((link) => (
