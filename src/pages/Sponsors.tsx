@@ -49,9 +49,9 @@ interface SponsorData {
   image: string;
   title: string;
   location: string;
-  mapLink: string;
+  maplink: string;
   text: string;
-  websiteLink: string;
+  websitelink: string;
 }
 
 // Sponsor Component
@@ -60,9 +60,9 @@ interface SponsorProps {
   image: string;
   title: string;
   location: string;
-  mapLink: string;
+  maplink: string;
   text: string;
-  websiteLink: string;
+  websitelink: string;
   isAdmin?: boolean;
   onSponsorDeleted?: () => void;
 }
@@ -72,9 +72,9 @@ const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
   image: z.string().url("Please enter a valid image URL"),
   location: z.string().min(1, "Location is required"),
-  mapLink: z.string().url("Please enter a valid map link URL"),
+  maplink: z.string().url("Please enter a valid map link URL"),
   text: z.string().min(1, "Discount text is required"),
-  websiteLink: z.string().url("Please enter a valid website URL"),
+  websitelink: z.string().url("Please enter a valid website URL"),
 });
 
 const Sponsor: React.FC<SponsorProps> = ({
@@ -82,9 +82,9 @@ const Sponsor: React.FC<SponsorProps> = ({
   image,
   title,
   location,
-  mapLink,
+  maplink,
   text,
-  websiteLink,
+  websitelink,
   isAdmin = false,
   onSponsorDeleted,
 }) => {
@@ -92,9 +92,9 @@ const Sponsor: React.FC<SponsorProps> = ({
 
   const handleCardClick = () => {
     // Ensure URL has proper format
-    const url = websiteLink.startsWith("http")
-      ? websiteLink
-      : `https://${websiteLink}`;
+    const url = websitelink.startsWith("http")
+      ? websitelink
+      : `https://${websitelink}`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
@@ -107,7 +107,7 @@ const Sponsor: React.FC<SponsorProps> = ({
       {/* Admin delete button */}
       {isAdmin && id && onSponsorDeleted && (
         <DeleteSponsorDialog
-          sponsor={{ id, image, title, location, mapLink, text, websiteLink }}
+          sponsor={{ id, image, title, location, maplink, text, websitelink }}
           onSponsorDeleted={onSponsorDeleted}
         />
       )}
@@ -139,7 +139,7 @@ const Sponsor: React.FC<SponsorProps> = ({
       {/* Sponsor content */}
       <CardContent className="p-6 text-center bg-black">
         <a
-          href={websiteLink}
+          href={websitelink}
           target="_blank"
           rel="noopener noreferrer"
           className=" group"
@@ -150,7 +150,7 @@ const Sponsor: React.FC<SponsorProps> = ({
           </h2>
         </a>
         <a
-          href={mapLink}
+          href={maplink}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center mb-4 px-4 py-2 bg-white rounded-full text-black t200e hover:bg-lb-200 mx-auto w-max"
@@ -181,9 +181,9 @@ function AddSponsorDialog({ onSponsorAdded }: { onSponsorAdded: () => void }) {
       title: "",
       image: "",
       location: "",
-      mapLink: "",
+      maplink: "",
       text: "",
-      websiteLink: "",
+      websitelink: "",
     },
   });
 
@@ -195,9 +195,9 @@ function AddSponsorDialog({ onSponsorAdded }: { onSponsorAdded: () => void }) {
           title: values.title,
           image: values.image,
           location: values.location,
-          mapLink: values.mapLink,
+          maplink: values.maplink,
           text: values.text,
-          websiteLink: values.websiteLink,
+          websitelink: values.websitelink,
         },
       ]);
 
@@ -287,7 +287,7 @@ function AddSponsorDialog({ onSponsorAdded }: { onSponsorAdded: () => void }) {
 
               <FormField
                 control={form.control}
-                name="mapLink"
+                name="maplink"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Map Link</FormLabel>
@@ -321,7 +321,7 @@ function AddSponsorDialog({ onSponsorAdded }: { onSponsorAdded: () => void }) {
 
               <FormField
                 control={form.control}
-                name="websiteLink"
+                name="websitelink"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Sponsor's Website Link</FormLabel>
@@ -465,46 +465,46 @@ export default function Sponsors() {
         image: seoulful,
         title: "Seoulful Convenience",
         location: "1619 Ellis St",
-        mapLink:
+        maplink:
           "https://www.google.ca/maps/place/Seoulful+Convenience/@49.885116,-119.4959369,17z/data=!3m1!4b1!4m6!3m5!1s0x537df52e4a80e70f:0x77812feb6aba0273!8m2!3d49.8851126!4d-119.493362!16s%2Fg%2F11lnhlpht6?entry=ttu&g_ep=EgoyMDI0MTExMC4wIKXMDSoASAFQAw%3D%3D",
         text: "5% off for KDT members!",
-        websiteLink: "https://seoulfulconvenience.ca",
+        websitelink: "https://seoulfulconvenience.ca",
       },
       {
         image: macaoimperialtea,
         title: "Macao Imperial Tea",
         location: "590 Hwy 33 W #23",
-        mapLink:
+        maplink:
           "https://www.google.ca/maps/place/Macao+Imperial+Tea/@49.8896423,-119.4000558,17z/data=!3m2!4b1!5s0x537d8d254aed5519:0xcfc309a147be2f5b!4m6!3m5!1s0x537d8de1f6a33909:0x884826c2eda55afd!8m2!3d49.8896389!4d-119.3974809!16s%2Fg%2F11tjx7cm31?entry=ttu&g_ep=EgoyMDI0MTAxNC4wIKXMDSoASAFQAw%3D%3D",
         text: "15% off for KDT members!",
-        websiteLink: "https://www.macaoimperialteacanada.com/",
+        websitelink: "https://www.macaoimperialteacanada.com/",
       },
       {
         image: tossingpizzeria,
         title: "Tossing Pizzeria",
         location: "975 Academy Way #120",
-        mapLink:
+        maplink:
           "https://www.google.ca/maps/place/Tossing+Pizzeria/@49.9350734,-119.4035122,17z/data=!3m1!4b1!4m6!3m5!1s0x537d8d9a4dffe3cf:0xf3f5a3a909ce0167!8m2!3d49.93507!4d-119.3986413!16s%2Fg%2F11hnt50t51?entry=ttu&g_ep=EgoyMDI0MTAxNC4wIKXMDSoASAFQAw%3D%3D",
         text: "15% off for KDT members!",
-        websiteLink: "https://www.tossingpizzeria.com/",
+        websitelink: "https://www.tossingpizzeria.com/",
       },
       {
         image: bubblewaffle,
         title: "Bubble Waffle Cafe",
         location: "5538 Airport Way #102",
-        mapLink:
+        maplink:
           "https://www.google.ca/maps/place/%E9%B8%A1%E8%9B%8B%E4%BB%94+Bubble+Waffle+Cafe+(Chinese+Restaurant)/@49.9508013,-119.3867347,17z/data=!3m2!4b1!5s0x537ded77da6dd3e9:0x1754ea70f96d416c!4m6!3m5!1s0x537ded5b5af637c7:0x58f6b1e233da392!8m2!3d49.9507979!4d-119.3841598!16s%2Fg%2F11v3yzttsy?entry=ttu&g_ep=EgoyMDI0MTAxNC4wIKXMDSoASAFQAw%3D%3D",
         text: "12% off for KDT members!",
-        websiteLink: "https://www.bubblewafflecafe.ca/",
+        websitelink: "https://www.bubblewafflecafe.ca/",
       },
       {
         image: formosa,
         title: "Formosa Tea Cafe",
         location: "1970 Kane Rd Unit 210",
-        mapLink:
+        maplink:
           "https://www.google.ca/maps/place/Formosa+Tea+Cafe+-+Glenmore+Location+(Bubble+Tea)/@49.9151098,-119.4450163,17z/data=!3m1!4b1!4m6!3m5!1s0x537df363e212f627:0x6cc37747be5faec5!8m2!3d49.9151064!4d-119.4424414!16s%2Fg%2F11tdbmlwh7?entry=ttu&g_ep=EgoyMDI0MTAxNC4wIKXMDSoASAFQAw%3D%3D",
         text: "10% off for KDT members!",
-        websiteLink: "https://www.formosateacafe.ca/",
+        websitelink: "https://www.formosateacafe.ca/",
       },
     ];
     try {
@@ -567,9 +567,9 @@ export default function Sponsors() {
                   image={sponsor.image}
                   title={sponsor.title}
                   location={sponsor.location}
-                  mapLink={sponsor.mapLink}
+                  maplink={sponsor.maplink}
                   text={sponsor.text}
-                  websiteLink={sponsor.websiteLink}
+                  websitelink={sponsor.websitelink}
                   isAdmin={!!user}
                   onSponsorDeleted={fetchSponsors}
                 />
