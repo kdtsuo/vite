@@ -56,7 +56,11 @@ export default function IconLinkWide({
   const imagePath = iconDetails?.imagePath;
 
   return (
-    <div className="flex items-center justify-center">
+    <div
+      className={`${
+        isOpen ? "" : "opacity-75 pointer-events-none"
+      } flex items-center justify-center`}
+    >
       {user && (
         <AlertDialog>
           <AlertDialogTrigger asChild>
@@ -106,7 +110,7 @@ export default function IconLinkWide({
           size={30}
         />
         {!isOpen && (
-          <div className="absolute text-xs text-white top-0 right-0 m-1 rounded-lg bg-gray-400 px-2 ">
+          <div className="absolute text-xs text-white top-0 left-0 m-1 rounded-lg bg-gray-400 px-2 ">
             <h1>NOT AVAILABLE</h1>
           </div>
         )}
