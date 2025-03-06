@@ -22,6 +22,7 @@ interface IconLinkWideProps {
   style?: string;
   isOpen?: boolean;
   date?: string;
+  onDelete?: () => void; // Add this line
 }
 
 export default function IconLinkWide({
@@ -31,6 +32,7 @@ export default function IconLinkWide({
   style,
   isOpen,
   date,
+  onDelete,
 }: IconLinkWideProps) {
   const { user } = useAuth();
   // if the date is less than 7 days old, display "New" on the link
@@ -39,10 +41,13 @@ export default function IconLinkWide({
     ? new Date(date) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
     : false;
 
+  // And modify the deleteLink function in the component:
   const deleteLink = () => {
-    console.log(`Deleting link: ${label}`);
-
-    toast.success(`Deleted link: ${label}`);
+    if (onDelete) {
+      onDelete(); // Call the onDelete function passed from the parent
+    } else {
+      toast.success(`Deleted link: ${label}`);
+    }
   };
 
   // Get icon or image from the map based on iconType

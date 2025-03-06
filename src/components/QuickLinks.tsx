@@ -26,13 +26,14 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
 import iconMap from "@/utils/iconMap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 
 interface QuickLinksProps {
   style?: string;
 }
 
-// Define the schema for our form - removing date from user input
+// Define the schema for our form
 const formSchema = z.object({
   label: z.string().min(1, "Label is required"),
   link: z.string().url("Please enter a valid URL"),
@@ -40,59 +41,51 @@ const formSchema = z.object({
   isOpen: z.boolean().default(true),
 });
 
+// Define the type for our links
+interface Link {
+  id?: number; // Supabase will provide this
+  iconType: string;
+  label: string;
+  link: string;
+  isOpen: boolean;
+  date: string;
+}
+
 export default function QuickLinks({ style }: QuickLinksProps) {
   const [open, setOpen] = useState(false);
-  const [links, setLinks] = useState([
-    {
-      iconType: "link",
-      label: "UBCO SQUID GAMES",
-      link: "https://www.bouncelife.com/events/670e957fccb9170c0e7e066b",
-      isOpen: true,
-      date: "2025-3-3",
-    },
-    {
-      iconType: "googleForms",
-      label: "Showcase Volunteer Sign Up",
-      link: "https://docs.google.com/forms/d/1wKNqjhKz84gjOZN76VDzymdlz-ExG51RhVHKcygsvn4/",
-      isOpen: true,
-      date: "2025-3-3",
-    },
-    {
-      iconType: "rubric",
-      label: "K-Fest Showcase Tickets",
-      link: "https://campus.hellorubric.com/?s=7805",
-      isOpen: true,
-      date: "2025-3-3",
-    },
-    {
-      iconType: "googleForms",
-      label: "KPop Dance Song Requests",
-      link: "https://forms.gle/yVZcBeKBWPCm235aA",
-      isOpen: true,
-      date: "2024-10-31",
-    },
-    {
-      iconType: "rubric",
-      label: "Merch",
-      link: "https://campus.hellorubric.com/?s=7805",
-      isOpen: true,
-      date: "2024-10-31",
-    },
-    {
-      iconType: "rubric",
-      label: "Memberships & Ticket Sales",
-      link: "https://campus.hellorubric.com/?s=7805",
-      isOpen: true,
-      date: "2024-10-31",
-    },
-    {
-      iconType: "discord",
-      label: "Discord Server",
-      link: "https://discord.com/invite/tbKkvjV2W8",
-      isOpen: true,
-      date: "2024-10-31",
-    },
-  ]);
+  const [links, setLinks] = useState<Link[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch links from Supabase on component mount
+  useEffect(() => {
+    fetchLinks();
+  }, []);
+
+  // Function to fetch links from Supabase
+  async function fetchLinks() {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("links")
+        .select("*")
+        .order("date", { ascending: false });
+
+      if (error) {
+        console.error("Fetch error details:", error);
+        throw error;
+      }
+
+      if (data) {
+        // Process data to handle missing user_id
+        setLinks(data);
+      }
+    } catch (error) {
+      toast.error("Failed to load links");
+      console.error("Error loading links: ", error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -104,15 +97,76 @@ export default function QuickLinks({ style }: QuickLinksProps) {
       isOpen: true,
     },
   });
+  // Function to add a new link
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      // Get current user
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Add the new link to the links array with current date
-    const currentDate = new Date().toISOString().split("T")[0]; // YYYY-MM-DD format
-    setLinks([...links, { ...values, date: currentDate }]);
-    toast.success(`Added new link: ${values.label}`);
-    setOpen(false);
-    console.log(values);
-    form.reset(); // Reset the form
+      if (!user) {
+        toast.error("You must be logged in to add links");
+        return;
+      }
+
+      // Format the current date as YYYY-MM-DD
+      const currentDate = new Date().toISOString().split("T")[0];
+
+      // Create the new link object
+      const newLink = {
+        ...values,
+        date: currentDate,
+        user_id: user.id, // Add user ID to link data
+      };
+
+      // Insert into Supabase
+      const { data, error } = await supabase
+        .from("links")
+        .insert([newLink])
+        .select();
+
+      if (error) {
+        throw error;
+      }
+
+      if (data) {
+        setLinks([data[0], ...links]);
+        toast.success(`Added new link: ${values.label}`);
+        setOpen(false);
+        form.reset();
+      }
+    } catch (error) {
+      toast.error("Failed to add link");
+      console.error("Error adding link: ", error);
+    }
+  }
+
+  // Function to delete a link
+  async function deleteLink(id: number, label: string) {
+    try {
+      // Get current user
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        toast.error("You must be logged in to delete links");
+        return;
+      }
+
+      const { error } = await supabase.from("links").delete().eq("id", id);
+
+      if (error) {
+        throw error;
+      }
+
+      setLinks(links.filter((link) => link.id !== id));
+      toast.success(`Deleted link: ${label}`);
+    } catch (error) {
+      toast.error("Failed to delete link");
+      console.error("Error deleting link: ", error);
+    }
   }
 
   return (
@@ -247,17 +301,29 @@ export default function QuickLinks({ style }: QuickLinksProps) {
           </DialogContent>
         </Dialog>
       )}
-      {links.map((link) => (
-        <IconLinkWide
-          key={link.label}
-          iconType={link.iconType}
-          label={link.label}
-          link={link.link}
-          isOpen={link.isOpen}
-          date={link.date}
-          style="bg-white border-3 text-center border-lb-300 hover:bg-lb-100 drop-shadow-box"
-        />
-      ))}
+
+      {loading ? (
+        <div className="flex justify-center py-8">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-700"></div>
+        </div>
+      ) : (
+        links.map((link) => (
+          <IconLinkWide
+            key={link.id || link.label}
+            iconType={link.iconType}
+            label={link.label}
+            link={link.link}
+            isOpen={link.isOpen}
+            date={link.date}
+            style="bg-white border-3 text-center border-lb-300 hover:bg-lb-100 drop-shadow-box"
+            onDelete={
+              link.id !== undefined
+                ? () => deleteLink(link.id as number, link.label)
+                : undefined
+            }
+          />
+        ))
+      )}
 
       <Toaster />
     </div>
