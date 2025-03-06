@@ -90,19 +90,10 @@ const Sponsor: React.FC<SponsorProps> = ({
 }) => {
   const [imageError, setImageError] = useState(false);
 
-  const handleCardClick = () => {
-    // Ensure URL has proper format
-    const url = websitelink.startsWith("http")
-      ? websitelink
-      : `https://${websitelink}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-
   return (
     <Card
       className="group relative overflow-hidden gap-0 rounded-xl t200e animate-fade-in
       hover:bg-lb-400 border border-white/10 w-full max-w-md mx-auto p-0 "
-      onClick={handleCardClick}
     >
       {/* Admin delete button */}
       {isAdmin && id && onSponsorDeleted && (
