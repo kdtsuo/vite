@@ -1,27 +1,27 @@
 import { LucideIcon } from "lucide-react";
+import { forwardRef, ButtonHTMLAttributes } from "react";
 
-interface IconButtonProps {
+interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: LucideIcon;
   label?: string;
-  onClick?: () => void;
-  style?: string;
+  className?: string; // Renamed from style to className
 }
 
-export default function IconButton({
-  icon: Icon,
-  label,
-  onClick,
-  style,
-}: IconButtonProps) {
-  return (
-    <button
-      onClick={onClick}
-      className={`${label ? "space-x-2 px-2" : "px-4"}
-        px-2 py-2 rounded-md text-lg font-medium flex items-center text-white cursor-pointer ${style}`}
-      aria-label={label}
-    >
-      <h1>{label}</h1>
-      <Icon strokeWidth={3} size={40} />
-    </button>
-  );
-}
+const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ icon: Icon, label, className, ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={`flex items-center gap-2 p-2 rounded ${className || ""}`}
+        {...props}
+      >
+        <Icon size={20} />
+        {label && <span>{label}</span>}
+      </button>
+    );
+  }
+);
+
+IconButton.displayName = "IconButton";
+
+export default IconButton;

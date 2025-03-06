@@ -86,7 +86,10 @@ export default function Navbar() {
           <div className="md:hidden">
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
-                <IconButton icon={Menu} style="cursor-pointer drop-shadow-md" />
+                <IconButton
+                  icon={Menu}
+                  className="cursor-pointer drop-shadow-md"
+                />
               </SheetTrigger>
               <SheetContent
                 side="right"

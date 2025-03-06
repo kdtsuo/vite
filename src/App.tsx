@@ -8,6 +8,9 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Sponsors from "./pages/Sponsors";
 import ScrollToTop from "./components/utils/ScrollToTop";
+import { inject } from "@vercel/analytics";
+
+inject();
 
 function App() {
   return (
