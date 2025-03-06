@@ -2,7 +2,7 @@ import IconLinkWide from "@/components/subcomponents/IconLinkWide";
 import rubricLogo from "@/assets/img/icons/rubriclogo.png";
 import discordColorLogo from "@/assets/img/icons/discordcolorlogo.png";
 import googleFormsLogo from "@/assets/img/icons/googleformslogo.png";
-import { Edit, Link } from "lucide-react";
+import { Link, ListPlus } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
@@ -75,9 +75,10 @@ export default function QuickLinks({ style }: QuickLinksProps) {
                 toast.error("This feature is not available yet");
               }}
               variant={"secondary"}
+              className="cursor-pointer"
             >
-              <Edit />
-              Edit Links
+              <ListPlus />
+              Add Links
             </Button>
           </DialogTrigger>
         </Dialog>
