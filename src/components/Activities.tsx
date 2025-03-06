@@ -37,8 +37,8 @@ export default function Activities() {
   return (
     <section
       className="bg-lb-800 py-16 px-4 lg:px-12 
-      bg-[radial-gradient(#ffffff12_1px,transparent_1px)] 
-      [background-size:10px_10px]"
+      bg-[radial-gradient(#ffffff25_1px,transparent_1px)] 
+      [background-size:30px_30px]"
     >
       <h1 className="text-4xl lg:text-5xl font-bold text-center text-white mb-16 relative">
         <span className="relative">
