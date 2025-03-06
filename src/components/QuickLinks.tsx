@@ -1,8 +1,12 @@
-import IconLinkWide from "./subcomponents/IconLinkWide";
-import rubricLogo from "../assets/img/icons/rubriclogo.png";
-import discordColorLogo from "../assets/img/icons/discordcolorlogo.png";
-import googleFormsLogo from "../assets/img/icons/googleformslogo.png";
-import { Link } from "lucide-react";
+import IconLinkWide from "@/components/subcomponents/IconLinkWide";
+import rubricLogo from "@/assets/img/icons/rubriclogo.png";
+import discordColorLogo from "@/assets/img/icons/discordcolorlogo.png";
+import googleFormsLogo from "@/assets/img/icons/googleformslogo.png";
+import { Edit, Link } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "./ui/button";
+import { toast, Toaster } from "sonner";
 
 interface QuickLinksProps {
   style?: string;
@@ -63,6 +67,21 @@ export default function QuickLinks({ style }: QuickLinksProps) {
 
   return (
     <div className={style}>
+      {useAuth().user && (
+        <Dialog>
+          <DialogTrigger>
+            <Button
+              onClick={() => {
+                toast.error("This feature is not available yet");
+              }}
+              variant={"secondary"}
+            >
+              <Edit />
+              Edit Links
+            </Button>
+          </DialogTrigger>
+        </Dialog>
+      )}
       {links.map((link) => (
         <IconLinkWide
           key={link.label}
@@ -75,6 +94,8 @@ export default function QuickLinks({ style }: QuickLinksProps) {
           style="bg-white border-3 text-center border-lb-300 hover:bg-lb-100 drop-shadow-box"
         />
       ))}
+
+      <Toaster />
     </div>
   );
 }
