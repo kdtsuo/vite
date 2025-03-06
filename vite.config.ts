@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/v3",
+  base: process.env.GITHUB_PAGES === "true" ? "/v3/" : "/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
