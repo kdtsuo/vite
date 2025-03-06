@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import kdtlogotransparent from "../assets/img/kdtlogotransparent.png";
 import IconButton from "./subcomponents/IconButton";
 import { supabase } from "@/lib/supabase";
-import { Loader2, LogIn, Menu } from "lucide-react";
+import { Loader2, LogIn, LogOut, Menu } from "lucide-react";
 import { useState } from "react";
 import {
   Sheet,
@@ -74,8 +74,8 @@ function LoginDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button size="icon" className="cursor-pointer" variant="secondary">
-          <LogIn size={24} />
+        <Button className="cursor-pointer" variant="secondary">
+          <LogIn size={24} /> Login
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -170,7 +170,7 @@ export default function Navbar() {
         }}
         className="cursor-pointer"
       >
-        Logout
+        <LogOut size={24} /> Logout
       </Button>
     </div>
   ) : (
