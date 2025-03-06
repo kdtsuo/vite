@@ -5,10 +5,12 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 import {
   Sheet,
+  SheetTitle,
   SheetContent,
   SheetFooter,
   SheetHeader,
   SheetTrigger,
+  SheetDescription,
 } from "@/components/ui/sheet";
 import instagramlogo from "../assets/img/icons/instagramlogo.png";
 import maillogo from "../assets/img/icons/maillogo.png";
@@ -96,6 +98,7 @@ export default function Navbar() {
                 side="right"
                 className="glass bg-lb-100/20 border-none w-3/4 md:w-full "
               >
+                <SheetTitle></SheetTitle>
                 <SheetHeader className="flex items-center mb-6">
                   <img
                     src={kdtlogotransparent}
@@ -103,6 +106,7 @@ export default function Navbar() {
                     className="w-28 h-auto mx-auto"
                   />
                 </SheetHeader>
+                <SheetDescription></SheetDescription>
                 <div className="flex flex-col items-center justify-center space-y-6 text-xl">
                   {links}
                 </div>
