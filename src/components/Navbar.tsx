@@ -82,7 +82,7 @@ export default function Navbar() {
           </Link>
 
           {/* Navigation Links */}
-          <div className="hidden md:flex space-x-6 text-xl">{links}</div>
+          <div className="hidden md:flex space-x-2 text-xl">{links}</div>
 
           {/* Mobile Menu Button using Sheet from shadcn */}
           <div className="md:hidden">

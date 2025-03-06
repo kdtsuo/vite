@@ -40,7 +40,7 @@ export default function IconLinkWide({
         size={30}
       />
       {!isOpen && (
-        <div className="absolute text-xs text-white top-0 right-0 m-1 rounded-lg bg-gray-400 px-2 text-dsg">
+        <div className="absolute text-xs text-white top-0 right-0 m-1 rounded-lg bg-gray-400 px-2 ">
           <h1>NOT AVAILABLE</h1>
         </div>
       )}
