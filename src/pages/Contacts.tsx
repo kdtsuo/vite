@@ -112,14 +112,14 @@ export default function Contacts() {
       title: "Instagram",
     },
     {
-      icon: githublogo,
-      href: "https://github.com/kdtsuo/v3",
-      title: "GitHub",
-    },
-    {
       icon: maillogo,
       href: "mailto:kpopdanceteam.suo@gmail.com",
       title: "Email",
+    },
+    {
+      icon: githublogo,
+      href: "https://github.com/kdtsuo/v3",
+      title: "GitHub",
     },
   ];
 
