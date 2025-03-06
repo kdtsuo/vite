@@ -54,7 +54,7 @@ export default function IconLinkWide({
             <Button
               size="icon"
               variant={"secondary"}
-              className="size-8 rounded-full p-0 mr-6 lg:mr-16 cursor-pointer"
+              className="size-8 rounded-full p-0 mr-3 lg:mr-16 cursor-pointer"
             >
               <X size={14} />
             </Button>
@@ -67,11 +67,13 @@ export default function IconLinkWide({
                 cannot be undone.
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter className="flex-row gap-2 sm:justify-end">
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogFooter className="flex-row gap-2 sm:justify-end ">
+              <AlertDialogCancel className="cursor-pointer">
+                Cancel
+              </AlertDialogCancel>
               <AlertDialogAction
                 onClick={deleteLink}
-                className="bg-destructive text-white hover:bg-destructive/90"
+                className="bg-destructive text-white hover:bg-destructive/90 cursor-pointer"
               >
                 Delete
               </AlertDialogAction>
@@ -82,7 +84,7 @@ export default function IconLinkWide({
       <a
         href={link}
         target="_blank"
-        className={`h-20 t200e flex flex-grow items-center justify-between gap-2 p-4 rounded-xl text-lg font-medium group zoomin-sm ${style}`}
+        className={`h-20 t200e flex flex-grow items-center justify-between gap-2 p-4 rounded-xl text-lg font-medium group lg:zoomin-sm ${style}`}
       >
         {Icon && <Icon strokeWidth={2} size={30} />}
         {image && <img src={image} alt={label} className="w-10 h-auto" />}

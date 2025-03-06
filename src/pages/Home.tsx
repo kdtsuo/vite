@@ -15,7 +15,7 @@ export default function Home() {
         <h1>all kpop fans ♥</h1>
       </div>
       <div className="w-full flex justify-center">
-        <QuickLinks style="flex flex-col space-y-4 w-4/5 mx-5 mt-5 md:max-w-1/2 justify-center m-auto md:mt-10" />
+        <QuickLinks style="flex flex-col space-y-4 w-full mx-4 mt-5 md:max-w-1/2 justify-center m-auto md:mt-10" />
       </div>
       <div className="py-5"></div>
       <Discover />
