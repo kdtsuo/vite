@@ -32,6 +32,13 @@ export default function QuickLinks({ style }: QuickLinksProps) {
       date: "2025-3-3",
     },
     {
+      image: googleFormsLogo,
+      label: "KPop Dance Song Requests",
+      link: "https://forms.gle/yVZcBeKBWPCm235aA",
+      isOpen: true,
+      date: "2024-10-31",
+    },
+    {
       image: rubricLogo,
       label: "Merch",
       link: "https://campus.hellorubric.com/?s=7805",
@@ -49,13 +56,6 @@ export default function QuickLinks({ style }: QuickLinksProps) {
       image: discordColorLogo,
       label: "Discord Server",
       link: "https://discord.com/invite/tbKkvjV2W8",
-      isOpen: true,
-      date: "2024-10-31",
-    },
-    {
-      image: googleFormsLogo,
-      label: "KPop Dance Song Requests",
-      link: "https://forms.gle/yVZcBeKBWPCm235aA",
       isOpen: true,
       date: "2024-10-31",
     },
