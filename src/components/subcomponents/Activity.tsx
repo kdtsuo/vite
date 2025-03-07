@@ -5,7 +5,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 interface ActivityProps {
   images: string[];
@@ -31,40 +38,44 @@ export default function Activity({
         w-full justify-center items-center md:space-x-4 overflow-hidden`}
       >
         <div className="w-full lg:w-1/2 flex justify-center py-6 px-10">
-          <Carousel className="w-11/12 lg:w-5/6">
+          <Carousel
+            className="w-11/12 lg:w-5/6 
+                        t200e hover:scale-105 border rounded-lg"
+          >
             <CarouselContent>
               {images.map((img, index) => (
                 <CarouselItem key={index}>
-                  <Card className="w-full h-full">
-                    <CardContent className="flex aspect-video items-center justify-center p-0">
-                      <img
-                        className="w-full h-full rounded-xl shadow-lg object-cover 
-                        transition-transform duration-200 hover:scale-105"
-                        src={img}
-                        alt={`${title} image`}
-                      />
-                    </CardContent>
-                  </Card>
+                  <img
+                    className="w-full h-full rounded-xl shadow-lg object-cover"
+                    src={img}
+                    alt={`${title} image`}
+                  />
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="text-white" />
-            <CarouselNext className="text-white" />
+            <CarouselPrevious />
+            <CarouselNext />
           </Carousel>
         </div>
-        <div
-          className="w-11/12 lg:w-1/2 p-6 bg-slate-800 backdrop-blur-sm rounded-xl shadow-lg max-w-lg 
-            transition-transform duration-200 hover:-translate-y-3"
+
+        <Card
+          className="w-full lg:w-1/2 max-w-lg shadow-lg
+          t200e hover:-translate-y-3"
         >
-          <h2 className="text-2xl lg:text-3xl font-bold text-lb-100 mb-4 capitalize">
-            {title}
-          </h2>
-          <p className="text-lg text-white leading-relaxed">{text}</p>
-        </div>
+          <CardHeader>
+            <CardTitle className="text-2xl lg:text-3xl capitalize">
+              {title}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <CardDescription className="text-lg leading-relaxed">
+              {text}
+            </CardDescription>
+          </CardContent>
+        </Card>
       </div>
-      {!isLast && (
-        <span className="w-1/2 h-1 bg-lb-100 rounded-full my-10"></span>
-      )}
+
+      {!isLast && <Separator className="w-1/2 rounded-full my-10" />}
     </div>
   );
 }
