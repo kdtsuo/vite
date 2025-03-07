@@ -1,17 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
 import kdtlogotransparent from "../assets/img/kdtlogotransparent.png";
-import IconButton from "./subcomponents/IconButton";
+
 import { supabase } from "@/lib/supabase";
-import { Loader2, LogIn, LogOut, Menu } from "lucide-react";
+import { Loader2, LogIn, LogOut, Menu, MoonIcon, SunIcon } from "lucide-react";
 import { useState } from "react";
 import {
   Sheet,
-  SheetTitle,
   SheetContent,
   SheetFooter,
   SheetHeader,
+  SheetTitle,
   SheetTrigger,
-  SheetDescription,
 } from "@/components/ui/sheet";
 import {
   Dialog,
@@ -32,6 +31,7 @@ import githublogo from "../assets/img/icons/githublogo.png";
 import IconLink from "./subcomponents/IconLink";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast, Toaster } from "sonner";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // Login Dialog Component
 function LoginDialog() {
@@ -74,8 +74,8 @@ function LoginDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="cursor-pointer" variant="secondary">
-          <LogIn size={24} /> Login
+        <Button variant="outline">
+          <LogIn size={24} className="mr-2" /> Login
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -130,6 +130,24 @@ function LoginDialog() {
   );
 }
 
+// Theme Toggle Button component
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="rounded-full"
+    >
+      <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <span className="sr-only">Toggle theme</span>
+    </Button>
+  );
+}
+
 export default function Navbar() {
   const { user, signOut } = useAuth();
   const { pathname } = useLocation();
@@ -137,23 +155,6 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  const links = items.map((item) => {
-    const path = item.toLowerCase();
-    const isActive =
-      pathname === `/${path}` || (pathname === "/" && item === "Home");
-
-    return (
-      <div key={item}>
-        <Link
-          to={path}
-          onClick={() => setOpen(false)}
-          className={`navbar-link t200e ${isActive ? "bg-lb-500" : ""}`}
-        >
-          {item}
-        </Link>
-      </div>
-    );
-  });
   const handleSignOut = async () => {
     try {
       setIsLoggingOut(true);
@@ -173,7 +174,7 @@ export default function Navbar() {
 
   const authSection = user ? (
     <div className="flex flex-col items-center space-y-2">
-      <span className="text-sm inline text-black px-2 py-1 bg-white rounded-full">
+      <span className="text-sm inline bg-accent text-accent-foreground px-2 py-1 rounded-full">
         {user.email?.split("@")[0]}
       </span>
       <Button
@@ -190,7 +191,7 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <LogOut size={24} /> Logout
+            <LogOut size={16} className="mr-2" /> Logout
           </>
         )}
       </Button>
@@ -198,6 +199,7 @@ export default function Navbar() {
   ) : (
     <LoginDialog />
   );
+
   const linkIcons = [
     {
       href: "https://www.instagram.com/kdt.suo/?theme=dark",
@@ -223,62 +225,100 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav
-        className="fixed left-1/2 top-0 z-50 mt-4 md:mt-7 flex
-                    w-11/12 max-w-7xl -translate-x-1/2 flex-col 
-                    items-center rounded-full bg-lb-500/20 p-0 md:p-3 glass"
-      >
-        <div className="container mx-auto flex justify-between items-center p-4">
-          {/* Logo */}
-          <Link to="/">
-            <img
-              src={kdtlogotransparent}
-              alt="KDT Logo"
-              className="w-16 h-auto"
-            />
-          </Link>
+      <div className="fixed left-1/2 top-0 z-50 mt-4 md:mt-7 w-11/12 max-w-7xl -translate-x-1/2">
+        <div className="w-full rounded-full border bg-background/80 backdrop-blur-md shadow-sm">
+          <div className="container mx-auto flex justify-between items-center p-4">
+            {/* Logo */}
+            <Link to="/">
+              <img
+                src={kdtlogotransparent}
+                alt="KDT Logo"
+                className="w-16 h-auto"
+              />
+            </Link>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-4">
-            <div className="hidden md:flex space-x-2 text-xl">{links}</div>
-            {authSection}
-          </div>
+            {/* Navigation Links - Desktop */}
+            <div className="hidden md:flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                {items.map((item) => {
+                  const path = item.toLowerCase();
+                  const itemPath = path === "home" ? "" : path;
+                  const isActive =
+                    pathname === `/${itemPath}` ||
+                    (pathname === "/" && item === "Home");
 
-          {/* Mobile Menu Button using Sheet from shadcn */}
-          <div className="md:hidden">
-            <Sheet open={open} onOpenChange={setOpen}>
-              <SheetTrigger asChild>
-                <IconButton
-                  icon={Menu}
-                  size={40}
-                  className="cursor-pointer drop-shadow-md text-white"
-                />
-              </SheetTrigger>
-              <SheetContent
-                side="right"
-                className="glass bg-lb-100/20 border-none w-3/4 md:w-full "
-              >
-                <SheetTitle></SheetTitle>
-                <SheetHeader className="flex items-center mb-6">
-                  <img
-                    src={kdtlogotransparent}
-                    alt="KDT Logo"
-                    className="w-28 h-auto mx-auto"
-                  />
-                </SheetHeader>
-                <SheetDescription></SheetDescription>
-                <div className="flex flex-col items-center justify-center space-y-6 text-xl">
-                  {links}
-                  {authSection}
-                </div>
-                <SheetFooter className="w-full flex justify-center mt-8">
-                  <IconLink links={linkIcons} />
-                </SheetFooter>
-              </SheetContent>
-            </Sheet>
+                  return (
+                    <Button
+                      key={item}
+                      asChild
+                      variant={isActive ? "default" : "ghost"}
+                      className="text-base font-medium"
+                      size="sm"
+                    >
+                      <Link to={`/${itemPath}`}>{item}</Link>
+                    </Button>
+                  );
+                })}
+              </div>
+              <div className="ml-4 flex items-center">{authSection}</div>
+
+              <div className="ml-4 flex items-center gap-2">
+                <ThemeToggle />
+              </div>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <Sheet open={open} onOpenChange={setOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Menu className="h-6 w-6" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right">
+                  <SheetHeader className="flex items-center mb-6">
+                    <SheetTitle>
+                      <img
+                        src={kdtlogotransparent}
+                        alt="KDT Logo"
+                        className="w-28 h-auto mx-auto"
+                      />
+                    </SheetTitle>
+                  </SheetHeader>
+                  <div className="flex flex-col items-center justify-center space-y-6 text-xl w-1/2 mx-auto">
+                    {items.map((item) => {
+                      const path = item.toLowerCase();
+                      const itemPath = path === "home" ? "" : path;
+                      const isActive =
+                        pathname === `/${itemPath}` ||
+                        (pathname === "/" && item === "Home");
+
+                      return (
+                        <Button
+                          key={item}
+                          asChild
+                          variant={isActive ? "default" : "ghost"}
+                          onClick={() => setOpen(false)}
+                          className="w-full justify-center text-lg"
+                        >
+                          <Link to={`/${itemPath}`}>{item}</Link>
+                        </Button>
+                      );
+                    })}
+                    <div className="pt-4 flex flex-col items-center gap-4">
+                      {authSection}
+                      <ThemeToggle />
+                    </div>
+                  </div>
+                  <SheetFooter className="w-full flex justify-center mt-8">
+                    <IconLink links={linkIcons} />
+                  </SheetFooter>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
-      </nav>
+      </div>
       <Toaster />
     </div>
   );

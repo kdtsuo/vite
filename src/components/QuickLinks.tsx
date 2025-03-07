@@ -359,7 +359,7 @@ export default function QuickLinks({ style }: QuickLinksProps) {
             link={link.link}
             isOpen={link.isOpen}
             date={link.date}
-            style="bg-white border-3 text-center border-lb-300 hover:bg-lb-100 drop-shadow-box"
+            style="bg-secondary border-3 border-ring text-center drop-shadow-box"
             onDelete={
               link.id !== undefined
                 ? () => deleteLink(link.id as number, link.label)

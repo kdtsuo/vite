@@ -26,9 +26,9 @@ function SheetPortal({
   return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />;
 }
 
-// Fix the SheetOverlay with forwardRef
+// Fix the SheetOverlay with forwardRef using React.ComponentPropsWithoutRef
 const SheetOverlay = React.forwardRef<
-  React.ElementRef<typeof SheetPrimitive.Overlay>,
+  React.ComponentRef<typeof SheetPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
@@ -44,9 +44,9 @@ const SheetOverlay = React.forwardRef<
 
 SheetOverlay.displayName = "SheetOverlay";
 
-// Update SheetContent to use forwardRef
+// Update SheetContent to use ComponentRef instead of ElementRef
 const SheetContent = React.forwardRef<
-  React.ElementRef<typeof SheetPrimitive.Content>,
+  React.ComponentRef<typeof SheetPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content> & {
     side?: "top" | "right" | "bottom" | "left";
   }
@@ -76,7 +76,7 @@ const SheetContent = React.forwardRef<
       data-[state=open]:bg-secondary absolute top-4 left-4 rounded-xs cursor-pointer
       opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none"
       >
-        <XIcon size={40} className="text-white" />
+        <XIcon />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>
     </SheetPrimitive.Content>

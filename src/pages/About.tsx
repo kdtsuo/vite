@@ -7,7 +7,7 @@ export default function About() {
     <div id="top" className="animate-fade-in h-auto">
       <div className="w-screen h-screen relative">
         <img
-          className="absolute inset-0 object-cover w-full h-full brightness-[0.25]"
+          className="absolute inset-0 object-cover w-full h-full brightness-[0.40]"
           src={teamphoto}
           alt="team"
         />
