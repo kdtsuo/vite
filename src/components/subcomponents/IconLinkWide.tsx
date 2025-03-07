@@ -120,13 +120,13 @@ export default function IconLinkWide({
         <a
           href={link}
           target="_blank"
-          className={`h-20 t200e flex flex-grow items-center justify-between gap-2 p-4 rounded-xl text-lg font-medium group ${style}`}
+          className={`h-20 t200e relative flex flex-grow items-center justify-between gap-2 p-4 rounded-xl text-lg font-medium group ${style}`}
         >
           <LinkContent />
         </a>
       ) : (
         <div
-          className={`h-20 t200e flex flex-grow items-center justify-between gap-2 p-4 rounded-xl text-lg font-medium group ${style} opacity-70 cursor-not-allowed`}
+          className={`h-20 t200e relative flex flex-grow items-center justify-between gap-2 p-4 rounded-xl text-lg font-medium group ${style} opacity-70 cursor-not-allowed`}
         >
           <LinkContent />
         </div>
