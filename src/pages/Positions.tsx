@@ -271,7 +271,7 @@ export default function Positions() {
                   {value && (
                     <Button
                       variant="secondary"
-                      className="border border-slate-400 cursor-pointer"
+                      className="border cursor-pointer"
                       onClick={() => {
                         const formUrl =
                           positionsData.find((p) => p.value === value)
