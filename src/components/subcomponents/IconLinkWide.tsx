@@ -21,7 +21,7 @@ interface IconLinkWideProps {
   iconType?: string;
   label: string;
   link: string;
-  style?: string;
+  className?: string;
   isOpen?: boolean;
   date?: string;
   onDelete?: () => void;
@@ -31,7 +31,7 @@ export default function IconLinkWide({
   iconType,
   label,
   link,
-  style,
+  className,
   isOpen = true,
   date,
   onDelete,
@@ -133,7 +133,7 @@ export default function IconLinkWide({
           variant="ghost"
           className={cn(
             "h-20 t200e relative flex w-full items-center px-4 py-3 rounded-xl text-lg font-medium group",
-            style
+            className
           )}
         >
           <a
@@ -150,8 +150,8 @@ export default function IconLinkWide({
           disabled
           variant="ghost"
           className={cn(
-            "h-20 t200e relative flex w-full items-center px-4 py-3 rounded-xl text-lg font-medium group opacity-70",
-            style
+            "h-20 relative flex w-full items-center px-4 py-3 rounded-xl text-lg font-medium group opacity-70",
+            className
           )}
         >
           <LinkContent />
