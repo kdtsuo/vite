@@ -19,7 +19,6 @@ import {
   Edit,
   Loader2,
   X,
-  Shield,
   Plus,
   Trash,
 } from "lucide-react";
@@ -376,7 +375,7 @@ export default function Positions() {
               <Dialog>
                 <DialogTrigger asChild>
                   <Button className="cursor-pointer" variant="secondary">
-                    <Shield />
+                    <Edit />
                     Edit Positions
                   </Button>
                 </DialogTrigger>
