@@ -1,38 +1,55 @@
-import rmlogo from "../assets/img/rmlogo.png";
+import rmlogo from "@/assets/img/rmlogo.png";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Footer() {
   const getYear = () => {
     const date = new Date();
     return date.getFullYear();
   };
+  const { theme } = useTheme();
   return (
-    <div
-      className="bg-slate-900 text-slate-200 p-4
-        flex flex-col items-center justify-center space-y-2
-        text-center"
+    <Card
+      className="text-center py-10 bg-primary-foreground rounded-none border-none"
+      style={{
+        background: `var(--bg-dotted-${theme === "dark" ? "dark" : "light"})`,
+      }}
     >
-      <div className="text-lg font-bold">
-        &copy; {getYear()} KDT ("KPop Dance Team")
-      </div>
-      <div className="text-sm flex items-center justify-center space-x-2">
-        <p>Made with ❤️ by</p>
-        <span>
-          <a href="https://rinmeng.github.io" target="_blank" rel="noreferrer">
-            <img src={rmlogo} alt="rmlogo" className="w-16 h-auto mx-1" />
+      <CardHeader>
+        <CardTitle>&copy; {getYear()} KDT ("KPop Dance Team")</CardTitle>
+        <CardDescription className="text-lg"></CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="text-sm flex items-center justify-center space-x-2">
+          <p>Made with ❤️ by</p>
+          <span>
+            <a
+              href="https://rinmeng.github.io"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={rmlogo} alt="rmlogo" className="w-16 h-auto mx-1" />
+            </a>
+          </span>
+        </div>
+        <p>
+          All photos are provided by{" "}
+          <a
+            className="underline "
+            href="https://www.tsengphoto.ca/"
+            target="_blank"
+          >
+            Tseng Photography
           </a>
-        </span>
-      </div>
-      <p>
-        All photos are provided by{" "}
-        <a
-          className="underline text-slate-300 hover:text-slate-400 t200e"
-          href="https://www.tsengphoto.ca/"
-          target="_blank"
-        >
-          Tseng Photography
-        </a>
-        .
-      </p>
-    </div>
+          .
+        </p>
+      </CardContent>
+    </Card>
   );
 }

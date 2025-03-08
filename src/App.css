@@ -71,7 +71,19 @@
     )
     0 0 / 20px 20px;
   --bg-dotted-light: radial-gradient(
-      color-mix(in oklch, var(--primary) 25%, transparent) 5%,
+      color-mix(in oklch, var(--primary) 50%, transparent) 5%,
+      transparent 1px
+    )
+    0 0 / 20px 20px;
+
+  --bg-foreground-dotted-dark: radial-gradient(
+      color-mix(in oklch, var(--foreground) 50%, transparent) 1%,
+      transparent 1px
+    )
+    0 0 / 20px 20px;
+
+  --bg-secondary-dotted-light: radial-gradient(
+      color-mix(in oklch, var(--foreground) 55%, transparent) 5%,
       transparent 1px
     )
     0 0 / 20px 20px;

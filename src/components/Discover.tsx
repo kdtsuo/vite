@@ -4,6 +4,7 @@ import joinourteam from "@/assets/img/stock/joinourteam.jpeg";
 import showcase from "@/assets/img/stock/showcase.jpeg";
 import events from "@/assets/img/stock/events.jpeg";
 import { BetweenHorizonalStart, Contact, HandCoins, Info } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Discover() {
   const discoverCards = [
@@ -42,13 +43,15 @@ export default function Discover() {
   ];
 
   return (
-    <div
-      className="bg-slate-800 text-white text-center py-10 
-    bg-[radial-gradient(#ffffff25_1px,transparent_1px)] [background-size:40px_40px]"
-    >
-      <h1 className="text-4xl font-bold mb-6">Discover More</h1>
-      {/* Cards Container */}
-      <div className="flex justify-center gap-6 flex-wrap mx-5">
+    <Card className="text-center py-10 bg-primary rounded-none border-none">
+      <CardHeader>
+        <CardTitle className="text-primary-foreground">
+          <div className="text-3xl md:text-6xl font-bold">Discover More</div>
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent className="flex justify-center gap-6 flex-wrap mx-5">
+        {/* Cards Container */}
         {discoverCards.map((card, index) => (
           <DiscoverCard
             key={`${card.title}-${index}`}
@@ -58,10 +61,10 @@ export default function Discover() {
             image={card.image}
             link={card.link}
             isOpen={card.isOpen}
-            style="w-full md:w-full lg:w-1/3 aspect-video"
+            className="w-full md:w-full lg:w-1/3 aspect-video"
           />
         ))}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

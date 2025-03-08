@@ -1,8 +1,15 @@
 import { LucideIcon } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 interface DiscoverCardProps {
-  style?: string;
+  className?: string;
   icon?: LucideIcon;
   title: string;
   description: string;
@@ -12,7 +19,7 @@ interface DiscoverCardProps {
 }
 
 export default function DiscoverCard({
-  style,
+  className,
   icon: Icon,
   title,
   description,
@@ -23,31 +30,40 @@ export default function DiscoverCard({
   return (
     <Link
       to={link}
-      className={`relative rounded-lg overflow-hidden shadow-lg group t200e flex justify-center ${style} ${
-        isOpen ? "opacity-100" : "opacity-50"
-      }`}
+      className={`block t200e ${
+        !isOpen ? "opacity-50" : "opacity-100"
+      } ${className}`}
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center t200e"
-        style={{ backgroundImage: `url(${image})` }}
-      ></div>
-      {/*  */}
-      <div className="absolute inset-0 bg-cover bg-center bg-black opacity-75 group-hover:opacity-60 t200e"></div>
+      <Card className="group h-full border-ring overflow-hidden relative shadow-lg t200e">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center t200e"
+          style={{ backgroundImage: `url(${image})` }}
+        />
 
-      {/* Dot pattern overlay - only visible on hover */}
-      <div
-        className="absolute inset-0 opacity-25 group-hover:opacity-40 t200e"
-        style={{
-          backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.25) 1px, transparent 1px)`,
-          backgroundSize: `12px 12px`,
-        }}
-      ></div>
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black opacity-75 group-hover:opacity-60 t200e" />
 
-      <div className="font-extralight relative p-6 text-white h-auto flex flex-col items-center justify-center text-center z-10">
-        {Icon && <Icon size={30} strokeWidth={2} />}
-        <h3 className="text-2xl md:text-3xl font-bold">{title}</h3>
-        <p className="text-md md:text-xl text-gray-200 t200e">{description}</p>
-      </div>
+        {/* Dot pattern overlay - only visible on hover */}
+        <div className="absolute inset-0 opacity-25 group-hover:opacity-40 t200e" />
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center text-center h-full p-6">
+          <CardHeader className="pb-2">
+            {Icon && (
+              <Icon size={30} strokeWidth={2} className="mx-auto text-white" />
+            )}
+            <CardTitle className="text-2xl md:text-3xl font-bold text-white">
+              {title}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <CardDescription className="text-md md:text-xl text-gray-200 t200e">
+              {description}
+            </CardDescription>
+          </CardContent>
+        </div>
+      </Card>
     </Link>
   );
 }
