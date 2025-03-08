@@ -38,10 +38,7 @@ export default function Activity({
         w-full justify-center items-center md:space-x-4 overflow-hidden`}
       >
         <div className="w-full lg:w-1/2 flex justify-center py-6 px-10">
-          <Carousel
-            className="w-11/12 lg:w-5/6 
-                        t200e hover:scale-105 border rounded-lg"
-          >
+          <Carousel className="w-11/12 lg:w-5/6 border rounded-xl">
             <CarouselContent>
               {images.map((img, index) => (
                 <CarouselItem key={index}>
