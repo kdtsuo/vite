@@ -7,7 +7,6 @@ import { useState } from "react";
 import {
   Sheet,
   SheetContent,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -289,11 +288,11 @@ export default function Navbar() {
                 <Sheet open={open} onOpenChange={setOpen}>
                   <SheetTrigger asChild>
                     <div role="button" className="p-2 outline rounded-xl">
-                      <Menu size={30} />
+                      <Menu />
                     </div>
                   </SheetTrigger>
                   <SheetContent side="right">
-                    <SheetHeader className="flex items-center mb-6">
+                    <SheetHeader className="flex items-center">
                       <SheetTitle>
                         <img
                           src={kdtlogotransparent}
@@ -302,7 +301,7 @@ export default function Navbar() {
                         />
                       </SheetTitle>
                     </SheetHeader>
-                    <div className="flex flex-col items-center justify-center space-y-6 text-xl w-1/2 mx-auto">
+                    <div className="flex flex-col items-center justify-center space-y-4 text-xl w-1/2 mx-auto">
                       {items.map((item) => {
                         const path = item.toLowerCase();
                         const itemPath = path === "home" ? "" : path;
@@ -326,10 +325,10 @@ export default function Navbar() {
                         {authSection}
                         <ThemeToggle />
                       </div>
+                      <div className="w-full flex justify-center">
+                        <IconLink links={linkIcons} />
+                      </div>
                     </div>
-                    <SheetFooter className="w-full flex justify-center mt-4">
-                      <IconLink links={linkIcons} />
-                    </SheetFooter>
                   </SheetContent>
                 </Sheet>
 

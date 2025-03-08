@@ -10,7 +10,7 @@ interface IconLinkProps {
 
 export default function IconLink({ links }: IconLinkProps) {
   return (
-    <div className="grid grid-cols-2 justify-items-center w-1/2 mx-auto ">
+    <div className="grid grid-cols-2 gap-2 justify-items-center w-full mx-auto ">
       {links.map((link, index) => (
         <a
           key={index}
