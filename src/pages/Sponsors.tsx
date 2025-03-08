@@ -10,7 +10,6 @@ import formosa from "@/assets/sponsors/formosa.png";
 import tossingpizzeria from "@/assets/sponsors/tossingpizzeria.jpeg";
 import macaoimperialtea from "@/assets/sponsors/macaoimperialtea.png";
 import seoulful from "@/assets/sponsors/seoulful.png";
-import locationLogo from "@/assets/img/icons/locationlogo.png";
 import {
   Loader2,
   ListPlus,

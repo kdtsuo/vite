@@ -32,6 +32,7 @@ import IconLink from "./subcomponents/IconLink";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast, Toaster } from "sonner";
 import { useTheme } from "@/contexts/ThemeContext";
+import { Separator } from "@radix-ui/react-separator";
 
 // Login Dialog Component
 function LoginDialog() {
@@ -75,7 +76,8 @@ function LoginDialog() {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">
-          <LogIn size={24} className="mr-2" /> Login
+          Login
+          <LogIn />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -135,16 +137,15 @@ function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <Button
-      variant="outline"
-      size="icon"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="rounded-full"
+    <div
+      role="button"
+      className="p-2 outline rounded-xl flex"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     >
       <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
       <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
       <span className="sr-only">Toggle theme</span>
-    </Button>
+    </div>
   );
 }
 
@@ -191,7 +192,8 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <LogOut size={16} className="mr-2" /> Logout
+            Logout
+            <LogOut />
           </>
         )}
       </Button>
@@ -227,7 +229,7 @@ export default function Navbar() {
     <div>
       <div className="fixed left-1/2 top-0 z-50 mt-4 md:mt-7 w-11/12 max-w-7xl -translate-x-1/2">
         <div className="w-full rounded-full border bg-background/80 backdrop-blur-md shadow-sm">
-          <div className="container mx-auto flex justify-between items-center p-4">
+          <div className=" w-full flex justify-between items-center py-4 px-2 lg:px-4">
             {/* Logo */}
             <Link to="/">
               <img
@@ -237,84 +239,84 @@ export default function Navbar() {
               />
             </Link>
 
-            {/* Navigation Links - Desktop */}
-            <div className="hidden md:flex items-center gap-2">
-              <div className="flex items-center gap-1">
-                {items.map((item) => {
-                  const path = item.toLowerCase();
-                  const itemPath = path === "home" ? "" : path;
-                  const isActive =
-                    pathname === `/${itemPath}` ||
-                    (pathname === "/" && item === "Home");
+            <div>
+              {/* Navigation Links - Desktop */}
+              <div className="hidden lg:flex items-center gap-2">
+                <div className="flex items-center gap-2 lg:gap-4">
+                  <ThemeToggle />
+                  {items.map((item) => {
+                    const path = item.toLowerCase();
+                    const itemPath = path === "home" ? "" : path;
+                    const isActive =
+                      pathname === `/${itemPath}` ||
+                      (pathname === "/" && item === "Home");
 
-                  return (
-                    <Button
-                      key={item}
-                      asChild
-                      variant={isActive ? "default" : "ghost"}
-                      className="text-base font-medium"
-                      size="sm"
-                    >
-                      <Link to={`/${itemPath}`}>{item}</Link>
-                    </Button>
-                  );
-                })}
+                    return (
+                      <Button
+                        key={item}
+                        asChild
+                        variant={isActive ? "default" : "outline"}
+                        className="text-base font-medium"
+                      >
+                        <Link to={`/${itemPath}`}>{item}</Link>
+                      </Button>
+                    );
+                  })}
+                </div>
+                <div className="ml-4 flex items-center">{authSection}</div>
               </div>
-              <div className="ml-4 flex items-center">{authSection}</div>
 
-              <div className="ml-4 flex items-center gap-2">
+              {/* Mobile Menu Button */}
+              <div className="lg:hidden h-auto flex items-center gap-4">
                 <ThemeToggle />
-              </div>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <Sheet open={open} onOpenChange={setOpen}>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Menu className="h-6 w-6" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right">
-                  <SheetHeader className="flex items-center mb-6">
-                    <SheetTitle>
-                      <img
-                        src={kdtlogotransparent}
-                        alt="KDT Logo"
-                        className="w-28 h-auto mx-auto"
-                      />
-                    </SheetTitle>
-                  </SheetHeader>
-                  <div className="flex flex-col items-center justify-center space-y-6 text-xl w-1/2 mx-auto">
-                    {items.map((item) => {
-                      const path = item.toLowerCase();
-                      const itemPath = path === "home" ? "" : path;
-                      const isActive =
-                        pathname === `/${itemPath}` ||
-                        (pathname === "/" && item === "Home");
-
-                      return (
-                        <Button
-                          key={item}
-                          asChild
-                          variant={isActive ? "default" : "ghost"}
-                          onClick={() => setOpen(false)}
-                          className="w-full justify-center text-lg"
-                        >
-                          <Link to={`/${itemPath}`}>{item}</Link>
-                        </Button>
-                      );
-                    })}
-                    <div className="pt-4 flex flex-col items-center gap-4">
-                      {authSection}
-                      <ThemeToggle />
+                <Sheet open={open} onOpenChange={setOpen}>
+                  <SheetTrigger asChild>
+                    <div role="button" className="p-2 outline rounded-xl">
+                      <Menu size={30} />
                     </div>
-                  </div>
-                  <SheetFooter className="w-full flex justify-center mt-4">
-                    <IconLink links={linkIcons} />
-                  </SheetFooter>
-                </SheetContent>
-              </Sheet>
+                  </SheetTrigger>
+                  <SheetContent side="right">
+                    <SheetHeader className="flex items-center mb-6">
+                      <SheetTitle>
+                        <img
+                          src={kdtlogotransparent}
+                          alt="KDT Logo"
+                          className="w-28 h-auto mx-auto"
+                        />
+                      </SheetTitle>
+                    </SheetHeader>
+                    <div className="flex flex-col items-center justify-center space-y-6 text-xl w-1/2 mx-auto">
+                      {items.map((item) => {
+                        const path = item.toLowerCase();
+                        const itemPath = path === "home" ? "" : path;
+                        const isActive =
+                          pathname === `/${itemPath}` ||
+                          (pathname === "/" && item === "Home");
+
+                        return (
+                          <Button
+                            key={item}
+                            asChild
+                            variant={isActive ? "default" : "ghost"}
+                            onClick={() => setOpen(false)}
+                            className="w-full justify-center text-lg"
+                          >
+                            <Link to={`/${itemPath}`}>{item}</Link>
+                          </Button>
+                        );
+                      })}
+                      <div className="pt-4 flex flex-col items-center gap-4">
+                        {authSection}
+                        <ThemeToggle />
+                      </div>
+                    </div>
+                    <SheetFooter className="w-full flex justify-center mt-4">
+                      <IconLink links={linkIcons} />
+                    </SheetFooter>
+                  </SheetContent>
+                </Sheet>
+                <Separator className="mr-1" />
+              </div>
             </div>
           </div>
         </div>
