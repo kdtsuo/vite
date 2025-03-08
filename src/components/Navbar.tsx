@@ -194,8 +194,8 @@ function LogoutDialog() {
         </DialogHeader>
         <DialogFooter>
           <Button onClick={handleSignOut}>
-            {isLoggingOut ? "Logging out..." : "Logout"}
             {isLoggingOut && <Loader2 className="animate-spin" />}
+            {isLoggingOut ? "Logging out..." : "Logout"}
           </Button>
         </DialogFooter>
       </DialogContent>
