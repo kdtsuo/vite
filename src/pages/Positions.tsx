@@ -350,10 +350,6 @@ export default function Positions() {
     }
   }, [selectedAction, selectedAdminPosition, positionsData, form]);
 
-  const tags = Array.from({ length: 50 }).map(
-    (_, i, a) => `v1.2.0-beta.${a.length - i}`
-  );
-
   return (
     <div className="animate-fade-in overflow-x-hidden">
       <div className="w-screen h-screen relative">
