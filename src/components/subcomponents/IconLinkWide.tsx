@@ -25,6 +25,7 @@ interface IconLinkWideProps {
   isOpen?: boolean;
   date?: string;
   onDelete?: () => void;
+  deleteMode?: boolean;
 }
 
 export default function IconLinkWide({
@@ -33,8 +34,9 @@ export default function IconLinkWide({
   link,
   className,
   isOpen = true,
-  date,
   onDelete,
+  deleteMode,
+  date,
 }: IconLinkWideProps) {
   const { user } = useAuth();
   const isNew = date
@@ -93,7 +95,7 @@ export default function IconLinkWide({
 
   return (
     <div className="flex items-center justify-center">
-      {user && (
+      {user && deleteMode && (
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button

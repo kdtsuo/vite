@@ -32,7 +32,7 @@ import IconLink from "./subcomponents/IconLink";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast, Toaster } from "sonner";
 import { useTheme } from "@/contexts/ThemeContext";
-import { Separator } from "@/components/ui/separator";
+
 // Theme Toggle Button component
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -332,7 +332,8 @@ export default function Navbar() {
                     </SheetFooter>
                   </SheetContent>
                 </Sheet>
-                <Separator className="mr-1" />
+
+                <div className="mr-1"></div>
               </div>
             </div>
           </div>
