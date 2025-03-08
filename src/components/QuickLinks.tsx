@@ -84,6 +84,7 @@ export default function QuickLinks() {
   const [links, setLinks] = useState<Link[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleteMode, setDeleteMode] = useState(false);
+  const { user } = useAuth();
 
   // Fetch links from Supabase on component mount
   useEffect(() => {
@@ -215,7 +216,7 @@ export default function QuickLinks() {
       className={`flex flex-col space-y-4 w-full px-10 lg:mx-4 
                   mt-5 md:max-w-1/2 justify-center m-auto md:mt-10`}
     >
-      {useAuth().user && (
+      {user && (
         <div className="flex justify-center space-x-2 mb-4">
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
