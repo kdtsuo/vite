@@ -302,6 +302,9 @@ export default function Navbar() {
                       </SheetTitle>
                     </SheetHeader>
                     <div className="flex flex-col items-center justify-center space-y-4 text-xl w-1/2 mx-auto">
+                      <div className="flex items-center justify-center">
+                        <ThemeToggle />
+                      </div>
                       {items.map((item) => {
                         const path = item.toLowerCase();
                         const itemPath = path === "home" ? "" : path;
@@ -321,9 +324,8 @@ export default function Navbar() {
                           </Button>
                         );
                       })}
-                      <div className="pt-4 flex flex-col items-center gap-4">
+                      <div className="flex flex-col items-center gap-4">
                         {authSection}
-                        <ThemeToggle />
                       </div>
                       <div className="w-full flex justify-center">
                         <IconLink links={linkIcons} />
