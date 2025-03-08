@@ -75,7 +75,7 @@ export default function Activity({
         </Card>
       </div>
 
-      {!isLast && <Separator className="w-1/2 rounded-full my-10" />}
+      {isLast && <Separator className="w-1/2 rounded-full my-10" />}
     </div>
   );
 }

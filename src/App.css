@@ -65,29 +65,6 @@
   --drop-shadow-3xl: 0 35px 35px rgba(0, 0, 0, 0.35);
   --drop-shadow-4xl: 0 45px 65px rgba(0, 0, 0, 0.45);
 
-  --bg-dotted-dark: radial-gradient(
-      color-mix(in oklch, var(--primary) 50%, transparent) 1%,
-      transparent 1px
-    )
-    0 0 / 20px 20px;
-  --bg-dotted-light: radial-gradient(
-      color-mix(in oklch, var(--primary) 50%, transparent) 5%,
-      transparent 1px
-    )
-    0 0 / 20px 20px;
-
-  --bg-foreground-dotted-dark: radial-gradient(
-      color-mix(in oklch, var(--foreground) 50%, transparent) 1%,
-      transparent 1px
-    )
-    0 0 / 20px 20px;
-
-  --bg-secondary-dotted-light: radial-gradient(
-      color-mix(in oklch, var(--foreground) 55%, transparent) 5%,
-      transparent 1px
-    )
-    0 0 / 20px 20px;
-
   --animate-fade-in: fadeIn 0.5s ease-in-out forwards;
 
   @keyframes fadeIn {
@@ -134,6 +111,41 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+
+  --bg-dotted-dark: radial-gradient(
+      color-mix(in oklch, var(--primary) 50%, transparent) 1%,
+      transparent 1px
+    )
+    0 0 / 20px 20px;
+  --bg-dotted-light: radial-gradient(
+      color-mix(in oklch, var(--primary) 50%, transparent) 5%,
+      transparent 1px
+    )
+    0 0 / 20px 20px;
+
+  --bg-more-dotted-dark: radial-gradient(
+      color-mix(in oklch, var(--primary) 50%, transparent) 1%,
+      transparent 1px
+    )
+    0 0 / 15px 15px;
+
+  --bg-more-dotted-light: radial-gradient(
+      color-mix(in oklch, var(--primary) 50%, transparent) 5%,
+      transparent 1px
+    )
+    0 0 / 15px 15px;
+
+  --bg-less-dotted-dark: radial-gradient(
+      color-mix(in oklch, var(--primary) 50%, transparent) 1%,
+      transparent 1px
+    )
+    0 0 / 30px 30px;
+
+  --bg-less-dotted-light: radial-gradient(
+      color-mix(in oklch, var(--primary) 50%, transparent) 5%,
+      transparent 1px
+    )
+    0 0 / 30px 30px;
 }
 
 .dark {

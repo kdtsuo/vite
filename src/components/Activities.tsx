@@ -4,6 +4,8 @@ import events2 from "../assets/img/stock/events2.jpeg";
 import events3 from "../assets/img/stock/events3.jpeg";
 import showcase from "../assets/img/stock/showcase.jpeg";
 import Activity from "./subcomponents/Activity";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface ActivityProps {
   images: string[];
@@ -13,6 +15,7 @@ interface ActivityProps {
 }
 
 export default function Activities() {
+  const { theme } = useTheme();
   const activities: ActivityProps[] = [
     {
       images: [dancepractice],
@@ -35,28 +38,30 @@ export default function Activities() {
   ];
 
   return (
-    <section
-      className="bg-lb-800 py-16 px-4 lg:px-12 
-      bg-[radial-gradient(#ffffff25_1px,transparent_1px)] 
-      [background-size:30px_30px]"
+    <Card
+      className="mt-10 m-5"
+      style={{
+        background: `var(--bg-less-dotted-${
+          theme === "dark" ? "dark" : "light"
+        })`,
+      }}
     >
-      <h1 className="text-4xl lg:text-5xl font-bold text-center text-white mb-16 relative">
-        <span className="relative">
-          Activities
-          <span className="absolute -bottom-3 left-0 w-full h-1 bg-lb-100 rounded-full"></span>
-        </span>
-      </h1>
-      <div>
-        {activities.map((activity, index) => (
-          <Activity
-            key={index}
-            images={activity.images}
-            title={activity.title}
-            text={activity.text}
-            reverse={activity.reverse}
-          />
-        ))}
-      </div>
-    </section>
+      <CardHeader>
+        <CardTitle className="text-6xl text-center">Activities</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div>
+          {activities.map((activity, index) => (
+            <Activity
+              key={index}
+              images={activity.images}
+              title={activity.title}
+              text={activity.text}
+              reverse={activity.reverse}
+            />
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 }

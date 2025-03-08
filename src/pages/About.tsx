@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export default function About() {
   return (
-    <div id="top" className="animate-fade-in h-auto">
+    <div id="top" className="animate-fade-in h-auto overflow-x-hidden">
       <div className="w-screen h-screen relative">
         <img
           className="absolute inset-0 object-cover w-full h-full brightness-[0.40]"
