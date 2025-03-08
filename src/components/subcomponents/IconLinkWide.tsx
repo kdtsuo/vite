@@ -59,18 +59,14 @@ export default function IconLinkWide({
     <>
       <div className="flex items-center w-full">
         <div className="flex-shrink-0 mr-4">
-          {Icon && <Icon />}
+          <div>{Icon && <Icon className="[&_svg]:size-10" />}</div>
           {imagePath && (
             <img src={imagePath} alt={label} className="w-10 h-auto" />
           )}
         </div>
         <h1 className="flex-grow text-center text-lg">{label}</h1>
         <div className="flex-shrink-0">
-          <ChevronRight
-            className="t200e opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-0"
-            strokeWidth={2}
-            size={30}
-          />
+          <ChevronRight className="t200e opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-0" />
         </div>
       </div>
 
@@ -150,7 +146,7 @@ export default function IconLinkWide({
           disabled
           variant="ghost"
           className={cn(
-            "h-20 relative flex w-full items-center px-4 py-3 rounded-xl text-lg font-medium group opacity-70",
+            "h-20 relative flex w-full items-center px-4 py-3 rounded-xl text-lg font-medium group opacity-70 ",
             className
           )}
         >
