@@ -310,7 +310,7 @@ export default function Navbar() {
                       <ThemeToggle />
                     </div>
                   </div>
-                  <SheetFooter className="w-full flex justify-center mt-8">
+                  <SheetFooter className="w-full flex justify-center mt-4">
                     <IconLink links={linkIcons} />
                   </SheetFooter>
                 </SheetContent>
