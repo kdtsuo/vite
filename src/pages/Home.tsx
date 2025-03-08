@@ -17,8 +17,8 @@ export default function Home() {
       >
         <div className="text-center text-xl md:text-4xl">
           <h1>all things kpop for ubco!</h1>
-          <h1>dance projects and meetups for</h1>
-          <h1>all kpop fans ♥</h1>
+          <h1>dance projects and meetups for all</h1>
+          <h1>kpop fans ♥</h1>
         </div>
         <div className="w-full flex justify-center">
           <QuickLinks />
