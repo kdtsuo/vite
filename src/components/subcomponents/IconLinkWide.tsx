@@ -110,7 +110,7 @@ export default function IconLinkWide({
                 cannot be undone.
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter className="flex-row gap-2 sm:justify-end">
+            <AlertDialogFooter className="flex-row gap-2 flex justify-center">
               <AlertDialogCancel className="cursor-pointer">
                 Cancel
               </AlertDialogCancel>
@@ -118,7 +118,7 @@ export default function IconLinkWide({
                 onClick={deleteLink}
                 className="bg-destructive hover:bg-destructive/90 cursor-pointer"
               >
-                Delete
+                Yea delete that hoe 🗑️
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>

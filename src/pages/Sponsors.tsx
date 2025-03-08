@@ -28,6 +28,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -401,8 +414,8 @@ function DeleteSponsorDialog({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
+    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+      <AlertDialogTrigger asChild>
         <Button
           className="flex items-center gap-2 cursor-pointer absolute top-2 right-2 z-20 h-8 w-8 p-0"
           variant="destructive"
@@ -411,51 +424,43 @@ function DeleteSponsorDialog({
         >
           <X size={16} />
         </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[400px]">
-        <DialogHeader>
-          <DialogTitle>Delete Sponsor</DialogTitle>
-        </DialogHeader>
-        <div className="py-4">
-          <p>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete Sponsor</AlertDialogTitle>
+          <AlertDialogDescription>
             Are you sure you want to delete <strong>{sponsor.title}</strong>?
-          </p>
-          <p className="text-sm text-muted-foreground mt-2">
             This action cannot be undone.
-          </p>
-        </div>
-        <div className="flex justify-end gap-2">
-          <Button
-            variant="outline"
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel
             onClick={(e) => {
-              setIsOpen(false);
               e.stopPropagation();
             }}
-            className="cursor-pointer"
           >
             Cancel
-          </Button>
-          <Button
-            variant="destructive"
+          </AlertDialogCancel>
+          <AlertDialogAction
             onClick={(e) => {
-              handleDelete();
               e.stopPropagation();
+              handleDelete();
             }}
             disabled={isDeleting}
-            className="cursor-pointer"
+            className="bg-destructive dark:text-primary not-dark:text-white hover:bg-destructive/90"
           >
             {isDeleting ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="animate-spin" />
                 Deleting...
               </>
             ) : (
               "Delete Sponsor"
             )}
-          </Button>
-        </div>
-      </DialogContent>
-    </Dialog>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
 
