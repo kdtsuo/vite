@@ -2,7 +2,15 @@ import { Link, useLocation } from "react-router-dom";
 import kdtlogotransparent from "../assets/img/kdtlogotransparent.png";
 
 import { supabase } from "@/lib/supabase";
-import { Loader2, LogIn, LogOut, Menu, MoonIcon, SunIcon } from "lucide-react";
+import {
+  Loader2,
+  LogIn,
+  LogOut,
+  LogOutIcon,
+  Menu,
+  MoonIcon,
+  SunIcon,
+} from "lucide-react";
 import { useState } from "react";
 import {
   Sheet,
@@ -32,7 +40,24 @@ import IconLink from "./subcomponents/IconLink";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast, Toaster } from "sonner";
 import { useTheme } from "@/contexts/ThemeContext";
-import { Separator } from "@radix-ui/react-separator";
+import { Separator } from "@/components/ui/separator";
+
+// Theme Toggle Button component
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <div
+      role="button"
+      className="p-2 outline rounded-xl flex"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+    >
+      <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <span className="sr-only">Toggle theme</span>
+    </div>
+  );
+}
 
 // Login Dialog Component
 function LoginDialog() {
@@ -132,28 +157,8 @@ function LoginDialog() {
   );
 }
 
-// Theme Toggle Button component
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-
-  return (
-    <div
-      role="button"
-      className="p-2 outline rounded-xl flex"
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-    >
-      <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-      <span className="sr-only">Toggle theme</span>
-    </div>
-  );
-}
-
-export default function Navbar() {
+function LogoutDialog() {
   const { user, signOut } = useAuth();
-  const { pathname } = useLocation();
-  const items = ["Home", "About", "Positions", "Contacts", "Sponsors"];
-  const [open, setOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const handleSignOut = async () => {
@@ -173,34 +178,47 @@ export default function Navbar() {
     }
   };
 
-  const authSection = user ? (
-    <div className="flex flex-col items-center space-y-2">
-      <span className="text-sm inline bg-accent text-accent-foreground px-2 py-1 rounded-full">
-        {user.email?.split("@")[0]}
-      </span>
-      <Button
-        size="sm"
-        variant="outline"
-        onClick={handleSignOut}
-        className="cursor-pointer"
-        disabled={isLoggingOut}
-      >
-        {isLoggingOut ? (
-          <>
-            <Loader2 size={16} className="mr-2 animate-spin" />
-            Logging out...
-          </>
-        ) : (
-          <>
-            Logout
-            <LogOut />
-          </>
-        )}
-      </Button>
-    </div>
-  ) : (
-    <LoginDialog />
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" disabled={isLoggingOut}>
+          {isLoggingOut ? (
+            <>
+              <Loader2 size={16} className="mr-2 animate-spin" />
+              Logging out...
+            </>
+          ) : (
+            <>
+              {user?.email?.split("@")[0]}
+              <LogOut />
+            </>
+          )}
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-[300px]">
+        <DialogHeader>
+          <DialogTitle>Logout</DialogTitle>
+          <DialogDescription>
+            Are you sure you want to log out?
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button onClick={handleSignOut}>
+            Logout <LogOut />
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
+}
+
+export default function Navbar() {
+  const { user } = useAuth();
+  const { pathname } = useLocation();
+  const items = ["Home", "About", "Positions", "Contacts", "Sponsors"];
+  const [open, setOpen] = useState(false);
+
+  const authSection = user ? <LogoutDialog /> : <LoginDialog />;
 
   const linkIcons = [
     {
@@ -263,7 +281,7 @@ export default function Navbar() {
                     );
                   })}
                 </div>
-                <div className="ml-4 flex items-center">{authSection}</div>
+                <div className="mx-4 flex items-center">{authSection}</div>
               </div>
 
               {/* Mobile Menu Button */}
