@@ -350,6 +350,10 @@ export default function Positions() {
     }
   }, [selectedAction, selectedAdminPosition, positionsData, form]);
 
+  const tags = Array.from({ length: 50 }).map(
+    (_, i, a) => `v1.2.0-beta.${a.length - i}`
+  );
+
   return (
     <div className="animate-fade-in overflow-x-hidden">
       <div className="w-screen h-screen relative">
@@ -499,7 +503,7 @@ export default function Positions() {
                             </Button>
                           </PopoverTrigger>
                           <PopoverContent className="w-[200px] p-0">
-                            <ScrollArea className="h-[100px]">
+                            <ScrollArea className="h-34" type="auto">
                               {positionsData.map((position) => {
                                 const positionValue = position.label
                                   .toLowerCase()
@@ -691,70 +695,62 @@ export default function Positions() {
                         className="w-[200px] justify-between cursor-pointer"
                         disabled={isLoading}
                       >
-                        {isLoading
-                          ? "Loading..."
-                          : value
-                          ? (() => {
-                              const label =
-                                positionsData.find(
-                                  (position) =>
-                                    position.label
-                                      .toLowerCase()
-                                      .replace(/\s+/g, "") === value
-                                )?.label || "";
-                              return label.length > 38
-                                ? label.substring(0, 35) + "..."
-                                : label;
-                            })()
-                          : "Select positions..."}
+                        {positionsData.find(
+                          (p) =>
+                            p.label.toLowerCase().replace(/\s+/g, "") === value
+                        )?.label || "Select position..."}
                         <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-[300px] p-0">
-                      <div className="rounded-md border">
-                        {positionsData.map((position) => {
-                          const positionValue = position.label
-                            .toLowerCase()
-                            .replace(/\s+/g, "");
-                          return (
-                            <div key={positionValue}>
-                              <div
-                                className={cn(
-                                  "cursor-pointer relative flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground",
-                                  value === positionValue
-                                    ? "bg-accent text-accent-foreground"
-                                    : `transparent ${
-                                        position.is_accepting_responses
-                                          ? ""
-                                          : "text-red-500 opacity-75"
-                                      }`
-                                )}
-                                onClick={() => {
-                                  setValue(
-                                    positionValue === value ? "" : positionValue
-                                  );
-                                  setOpen(false);
-                                }}
-                              >
-                                {position.label}
-                                {position.is_accepting_responses ? (
-                                  <Check
-                                    className={cn(
-                                      "ml-auto h-4 w-4",
-                                      value === positionValue
-                                        ? "opacity-100"
-                                        : "opacity-0"
-                                    )}
-                                  />
-                                ) : (
-                                  <X className="ml-auto h-4 w-4 text-red-500" />
-                                )}
+                      <ScrollArea className="h-34" type="auto">
+                        <div className="rounded-md border">
+                          {positionsData.map((position) => {
+                            const positionValue = position.label
+                              .toLowerCase()
+                              .replace(/\s+/g, "");
+                            return (
+                              <div key={positionValue}>
+                                <div
+                                  className={cn(
+                                    "cursor-pointer relative flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground",
+                                    value === positionValue
+                                      ? "bg-accent text-accent-foreground"
+                                      : `transparent ${
+                                          position.is_accepting_responses
+                                            ? ""
+                                            : "text-red-500 opacity-75"
+                                        }`
+                                  )}
+                                  onClick={() => {
+                                    setValue(
+                                      positionValue === value
+                                        ? ""
+                                        : positionValue
+                                    );
+                                    setOpen(false);
+                                  }}
+                                >
+                                  {position.label}
+                                  {position.is_accepting_responses ? (
+                                    <Check
+                                      className={cn(
+                                        "ml-auto h-4 w-4",
+                                        value === positionValue
+                                          ? "opacity-100"
+                                          : "opacity-0"
+                                      )}
+                                    />
+                                  ) : (
+                                    <X className="ml-auto h-4 w-4 text-red-500" />
+                                  )}
+                                </div>
+                                <Separator />
                               </div>
-                              <Separator />
-                            </div>
-                          );
-                        })}
-                      </div>
+                            );
+                          })}
+                        </div>
+                      </ScrollArea>
                     </PopoverContent>
                   </Popover>
                 </div>
