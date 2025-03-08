@@ -126,7 +126,7 @@ const Sponsor: React.FC<SponsorProps> = ({
           onClick={(e) => e.stopPropagation()}
         >
           <div
-            className="absolute inset-0 flex items-center justify-center p-6 "
+            className="absolute inset-0 flex items-center justify-center p-6"
             style={{
               background: `var(--bg-xless-dotted-${
                 theme === "dark" ? "dark" : "light"
@@ -151,7 +151,7 @@ const Sponsor: React.FC<SponsorProps> = ({
       </div>
 
       {/* Sponsor content */}
-      <CardContent className="p-6 text-center bg-primary space-y-4">
+      <CardContent className="p-6 text-center bg-primary space-y-4 flex flex-col justify-center items-center">
         <CardTitle>
           <Button
             onClick={(e) => {
@@ -172,10 +172,7 @@ const Sponsor: React.FC<SponsorProps> = ({
         >
           <MapPin />
           <div className="text-sm font-medium">{location}</div>
-          <SquareArrowOutUpRight
-            size={16}
-            className="w-3 h-3 ml-1 opacity-70"
-          />
+          <SquareArrowOutUpRight size={10} />
         </Button>
         <Badge className="text-sm bg-yellow-500 text-black">{text}</Badge>
       </CardContent>
