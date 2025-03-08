@@ -57,7 +57,7 @@ export default function IconLinkWide({
     <>
       <div className="flex items-center w-full">
         <div className="flex-shrink-0 mr-4">
-          {Icon && <Icon strokeWidth={2} size={30} />}
+          {Icon && <Icon />}
           {imagePath && (
             <img src={imagePath} alt={label} className="w-10 h-auto" />
           )}
@@ -135,15 +135,13 @@ export default function IconLinkWide({
             "h-20 t200e relative flex w-full items-center px-4 py-3 rounded-xl text-lg font-medium group",
             className
           )}
+          onClick={() => {
+            window.open(link, "_blank");
+          }}
         >
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex w-full"
-          >
+          <div className="flex w-full">
             <LinkContent />
-          </a>
+          </div>
         </Button>
       ) : (
         <Button
