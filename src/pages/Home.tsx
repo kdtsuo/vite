@@ -1,15 +1,19 @@
 import QuickLinks from "@/components/QuickLinks";
 import Discover from "@/components/Discover";
 import Footer from "@/components/Footer";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Home() {
+  const { theme } = useTheme();
   return (
     <div
       id="top"
-      className="animate-fade-in mx-auto bg-lb-100 h-auto pt-34 md:pt-46 
-    bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"
+      className="animate-fade-in mx-auto  h-auto pt-34 md:pt-46"
+      style={{
+        background: `var(--bg-dotted-${theme === "dark" ? "dark" : "light"})`,
+      }}
     >
-      <div className="text-center text-dsg text-xl md:text-4xl">
+      <div className="text-center text-xl md:text-4xl">
         <h1>all things kpop for ubco!</h1>
         <h1>dance projects and meetups for</h1>
         <h1>all kpop fans ♥</h1>

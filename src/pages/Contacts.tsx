@@ -23,6 +23,7 @@ import emailjs from "emailjs-com";
 import Footer from "@/components/Footer";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // Define schema for form validation
 const formSchema = z.object({
@@ -50,6 +51,7 @@ interface SocialLink {
 
 export default function Contacts() {
   const [isCurrentlySubmitting, setIsCurrentlySubmitting] = useState(false);
+  const { theme } = useTheme();
   // Define form with React Hook Form and zod validation
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -124,10 +126,16 @@ export default function Contacts() {
   ];
 
   return (
-    <div className="animate-fade-in">
+    <div
+      className="animate-fade-in"
+      style={{
+        background: `var(--bg-dotted-${theme === "dark" ? "dark" : "light"})`,
+      }}
+    >
+      <div></div>
       <div
-        className="bg-lb-100 h-auto lg:h-screen w-full flex items-center justify-center pt-40 pb-20 lg:py-10 
-        bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"
+        className="h-auto lg:h-screen w-full flex items-center justify-center pt-36  
+        "
       >
         <Card className="m-5 w-full max-w-6xl overflow-hidden">
           <CardContent className="p-0 flex flex-col lg:flex-row relative">
@@ -145,7 +153,7 @@ export default function Contacts() {
                     rel="noopener noreferrer"
                   >
                     <Card className="hover:shadow-lg transition-all duration-200 hover:-translate-y-1 bg-secondary-foreground">
-                      <CardHeader className="flex flex-row items-center justify-between lg:justify-start space-x-4 p-4">
+                      <CardHeader className="flex flex-row items-center justify-between lg:justify-start space-x-4">
                         <img
                           src={link.icon}
                           alt={link.title}
