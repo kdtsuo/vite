@@ -580,7 +580,7 @@ export default function Positions() {
                           <div className="flex justify-end gap-2">
                             <DialogClose asChild>
                               <Button type="button" variant="outline">
-                                Cancel
+                                Close
                               </Button>
                             </DialogClose>
                             <Button
@@ -632,22 +632,17 @@ export default function Positions() {
                             <AlertDialogAction
                               onClick={handleDeletePosition}
                               disabled={isSubmitting}
-                              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                              className="bg-destructive dark:text-destructive-foreground not-dark:text-background"
                             >
                               {isSubmitting && (
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                <Loader2 className="animate-spin" />
                               )}
-                              Delete
+                              Yea get rid of dat hoe
                             </AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>
                       </AlertDialog>
                     )}
-
-                    {/* Close Dialog */}
-                    <DialogClose asChild>
-                      <Button variant="secondary">Close</Button>
-                    </DialogClose>
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
