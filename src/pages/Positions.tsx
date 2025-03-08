@@ -150,7 +150,7 @@ export default function Positions() {
   }, [value, positionsData]);
 
   return (
-    <div className="animate-fade-in">
+    <div className="animate-fade-in overflow-x-hidden">
       <div className="w-screen h-screen relative">
         <img
           className="absolute inset-0 object-cover w-full h-full brightness-[0.25]"
