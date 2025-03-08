@@ -2,15 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import kdtlogotransparent from "../assets/img/kdtlogotransparent.png";
 
 import { supabase } from "@/lib/supabase";
-import {
-  Loader2,
-  LogIn,
-  LogOut,
-  LogOutIcon,
-  Menu,
-  MoonIcon,
-  SunIcon,
-} from "lucide-react";
+import { Loader2, LogIn, LogOut, Menu, MoonIcon, SunIcon } from "lucide-react";
 import { useState } from "react";
 import {
   Sheet,
@@ -41,7 +33,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { toast, Toaster } from "sonner";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Separator } from "@/components/ui/separator";
-
 // Theme Toggle Button component
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -218,7 +209,15 @@ export default function Navbar() {
   const items = ["Home", "About", "Positions", "Contacts", "Sponsors"];
   const [open, setOpen] = useState(false);
 
-  const authSection = user ? <LogoutDialog /> : <LoginDialog />;
+  const authSection = user ? (
+    <>
+      <LogoutDialog />
+    </>
+  ) : (
+    <>
+      <LoginDialog />
+    </>
+  );
 
   const linkIcons = [
     {
