@@ -57,6 +57,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 type Position = {
   label: string;
@@ -481,19 +482,24 @@ export default function Positions() {
                               className="justify-between cursor-pointer"
                             >
                               {selectedAdminPosition
-                                ? positionsData.find(
-                                    (p) =>
-                                      p.label
-                                        .toLowerCase()
-                                        .replace(/\s+/g, "") ===
-                                      selectedAdminPosition
-                                  )?.label || "Select position..."
+                                ? ((label) =>
+                                    label.length > 38
+                                      ? label.substring(0, 35) + "..."
+                                      : label)(
+                                    positionsData.find(
+                                      (p) =>
+                                        p.label
+                                          .toLowerCase()
+                                          .replace(/\s+/g, "") ===
+                                        selectedAdminPosition
+                                    )?.label || "Select position..."
+                                  )
                                 : "Select position..."}
                               <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
                             </Button>
                           </PopoverTrigger>
                           <PopoverContent className="w-[200px] p-0">
-                            <div className="rounded-md border max-h-[200px] overflow-y-auto">
+                            <ScrollArea className="h-[100px]">
                               {positionsData.map((position) => {
                                 const positionValue = position.label
                                   .toLowerCase()
@@ -512,7 +518,10 @@ export default function Positions() {
                                         setPositionSelectOpen(false);
                                       }}
                                     >
-                                      {position.label}
+                                      {position.label.length > 38
+                                        ? position.label.substring(0, 35) +
+                                          "..."
+                                        : position.label}
                                       {selectedAdminPosition ===
                                         positionValue && (
                                         <Check className="ml-auto h-4 w-4" />
@@ -522,7 +531,7 @@ export default function Positions() {
                                   </div>
                                 );
                               })}
-                            </div>
+                            </ScrollArea>
                           </PopoverContent>
                         </Popover>
                       </div>
@@ -571,7 +580,7 @@ export default function Positions() {
                                 </FormItem>
                               )}
                             />
-                            <Label className="text-muted-foreground font-normal">
+                            <Label className="text-muted-foreground font-normal leading-6">
                               Forms from Google Forms will be automatically
                               checked for availability.
                             </Label>
@@ -613,18 +622,22 @@ export default function Positions() {
                               Are you absolutely sure?
                             </AlertDialogTitle>
                             <AlertDialogDescription>
-                              This action cannot be undone. This will
-                              permanently delete the position "
-                              {
-                                positionsData.find(
-                                  (p) =>
-                                    p.label
-                                      .toLowerCase()
-                                      .replace(/\s+/g, "") ===
-                                    selectedAdminPosition
-                                )?.label
-                              }
-                              " from the database.
+                              Permanently delete the position "
+                              {(() => {
+                                const label =
+                                  positionsData.find(
+                                    (p) =>
+                                      p.label
+                                        .toLowerCase()
+                                        .replace(/\s+/g, "") ===
+                                      selectedAdminPosition
+                                  )?.label || "";
+
+                                return label.length > 38
+                                  ? label.substring(0, 35) + "..."
+                                  : label;
+                              })()}
+                              " from the database? This action cannot be undone.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
@@ -668,9 +681,9 @@ export default function Positions() {
                 <DialogDescription>
                   Select a position that you're interested in.
                 </DialogDescription>
-                <div className="flex items-center gap-2">
+                <div className="flex justify-center  items-center">
                   <Popover open={open} onOpenChange={setOpen}>
-                    <PopoverTrigger asChild>
+                    <PopoverTrigger className="min-w-full" asChild>
                       <Button
                         variant="outline"
                         role="combobox"
@@ -681,17 +694,23 @@ export default function Positions() {
                         {isLoading
                           ? "Loading..."
                           : value
-                          ? positionsData.find(
-                              (position) =>
-                                position.label
-                                  .toLowerCase()
-                                  .replace(/\s+/g, "") === value
-                            )?.label
+                          ? (() => {
+                              const label =
+                                positionsData.find(
+                                  (position) =>
+                                    position.label
+                                      .toLowerCase()
+                                      .replace(/\s+/g, "") === value
+                                )?.label || "";
+                              return label.length > 38
+                                ? label.substring(0, 35) + "..."
+                                : label;
+                            })()
                           : "Select positions..."}
                         <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-[200px] p-0">
+                    <PopoverContent className="w-[300px] p-0">
                       <div className="rounded-md border">
                         {positionsData.map((position) => {
                           const positionValue = position.label
