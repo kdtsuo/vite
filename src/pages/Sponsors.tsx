@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
@@ -17,6 +17,7 @@ import {
   SquareArrowOutUpRight,
   ImageIcon,
   X,
+  MapPin,
 } from "lucide-react";
 import Footer from "@/components/Footer";
 
@@ -42,6 +43,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useTheme } from "@/contexts/ThemeContext";
+import { Badge } from "@/components/ui/badge";
 
 // Define types for sponsors and quick links
 interface SponsorData {
@@ -89,11 +92,12 @@ const Sponsor: React.FC<SponsorProps> = ({
   onSponsorDeleted,
 }) => {
   const [imageError, setImageError] = useState(false);
+  const { theme } = useTheme();
 
   return (
     <Card
       className="group relative overflow-hidden gap-0 rounded-xl t200e animate-fade-in
-      hover:bg-lb-400 border border-white/10 w-full max-w-md mx-auto p-0 "
+       w-full max-w-md mx-auto p-0 "
     >
       {/* Admin delete button */}
       {isAdmin && id && onSponsorDeleted && (
@@ -109,7 +113,14 @@ const Sponsor: React.FC<SponsorProps> = ({
           className="block w-full h-full"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="absolute inset-0 flex items-center justify-center p-6 bg-white bg-[radial-gradient(#000000_1px,transparent_1px)] [background-size:30px_30px]">
+          <div
+            className="absolute inset-0 flex items-center justify-center p-6 "
+            style={{
+              background: `var(--bg-xless-dotted-${
+                theme === "dark" ? "dark" : "light"
+              })`,
+            }}
+          >
             {imageError ? (
               <div className="flex flex-col items-center justify-center">
                 <ImageIcon size={48} className="text-gray-300 mb-2" />
@@ -128,34 +139,33 @@ const Sponsor: React.FC<SponsorProps> = ({
       </div>
 
       {/* Sponsor content */}
-      <CardContent className="p-6 text-center bg-black">
-        <a
-          href={websitelink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className=" group"
+      <CardContent className="p-6 text-center bg-primary space-y-4">
+        <CardTitle>
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open(websitelink, "_blank");
+            }}
+          >
+            <div className="text-2xl">{title}</div>
+            <SquareArrowOutUpRight />
+          </Button>
+        </CardTitle>
+        <Button
+          variant="secondary"
+          onClick={(e) => {
+            e.stopPropagation();
+            window.open(maplink, "_blank");
+          }}
         >
-          <h2 className="inline-flex items-center justify-center mb-3 text-2xl font-bold text-white t200e hover:text-blue-500">
-            {title}
-            <SquareArrowOutUpRight size={24} className="w-4 h-4 ml-2" />
-          </h2>
-        </a>
-        <a
-          href={maplink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center mb-4 px-4 py-2 bg-white rounded-full text-black t200e hover:bg-lb-200 mx-auto w-max"
-        >
-          <img src={locationLogo} alt="Location" className="w-4 h-4 mr-2" />
-          <span className="text-sm font-medium">{location}</span>
+          <MapPin />
+          <div className="text-sm font-medium">{location}</div>
           <SquareArrowOutUpRight
             size={16}
             className="w-3 h-3 ml-1 opacity-70"
           />
-        </a>
-        <div className="inline-block px-4 py-2 bg-yellow-400 rounded-full text-black font-medium text-sm">
-          {text}
-        </div>
+        </Button>
+        <Badge className="text-sm bg-yellow-500 text-black">{text}</Badge>
       </CardContent>
     </Card>
   );
@@ -222,7 +232,7 @@ function AddSponsorDialog({ onSponsorAdded }: { onSponsorAdded: () => void }) {
       <DialogTrigger asChild>
         <Button
           className="flex items-center gap-2 cursor-pointer"
-          variant="secondary"
+          variant="default"
         >
           <ListPlus size={20} /> Add Sponsor
         </Button>
@@ -395,7 +405,7 @@ function DeleteSponsorDialog({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="flex items-center gap-2 cursor-pointer absolute top-2 right-2 z-20 bg-red-600 hover:bg-red-700 h-8 w-8 p-0"
+          className="flex items-center gap-2 cursor-pointer absolute top-2 right-2 z-20 h-8 w-8 p-0"
           variant="destructive"
           size="sm"
           onClick={(e) => e.stopPropagation()}
@@ -455,6 +465,7 @@ export default function Sponsors() {
   const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [sponsors, setSponsors] = useState<SponsorData[]>([]);
+  const { theme } = useTheme();
 
   // Fetch sponsors from Supabase
   const fetchSponsors = useCallback(async () => {
@@ -541,9 +552,10 @@ export default function Sponsors() {
     <div>
       <section
         id="sponsors"
-        className="relative overflow-hidden px-10 
-        bg-lb-100 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]
-        pt-30 md:pt-46"
+        className="relative overflow-hidden px-10 pt-30 md:pt-46"
+        style={{
+          background: `var(--bg-dotted-${theme === "dark" ? "dark" : "light"})`,
+        }}
       >
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Admin section for logged in users */}

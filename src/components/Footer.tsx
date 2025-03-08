@@ -18,7 +18,9 @@ export default function Footer() {
     <Card
       className="text-center py-10 bg-primary-foreground rounded-none border-none"
       style={{
-        background: `var(--bg-dotted-${theme === "dark" ? "dark" : "light"})`,
+        background: `var(--bg-xless-dotted-${
+          theme === "dark" ? "dark" : "light"
+        })`,
       }}
     >
       <CardHeader>

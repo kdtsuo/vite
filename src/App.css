@@ -51,22 +51,7 @@
 }
 
 @theme {
-  --color-lb-100: oklch(90.14% 0.0579 232.56);
-  --color-lb-200: oklch(85.14% 0.0579 232.56);
-  --color-lb-300: oklch(80.14% 0.0579 232.56);
-  --color-lb-400: oklch(75.14% 0.0579 232.56);
-  --color-lb-500: oklch(70.14% 0.0579 232.56);
-  --color-lb-600: oklch(65.14% 0.0579 232.56);
-  --color-lb-700: oklch(60.14% 0.0579 232.56);
-  --color-lb-800: oklch(55.14% 0.0579 232.56);
-  --color-lb-900: oklch(50.14% 0.0579 232.56);
-  --color-dsg: oklch(32.51% 0.0291 141.08);
-  --drop-shadow-box: 1px 6px 6px rgba(0, 0, 0, 0.25);
-  --drop-shadow-3xl: 0 35px 35px rgba(0, 0, 0, 0.35);
-  --drop-shadow-4xl: 0 45px 65px rgba(0, 0, 0, 0.45);
-
   --animate-fade-in: fadeIn 0.5s ease-in-out forwards;
-
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -146,6 +131,18 @@
       transparent 1px
     )
     0 0 / 30px 30px;
+
+  --bg-xless-dotted-dark: radial-gradient(
+      color-mix(in oklch, var(--primary) 50%, transparent) 1%,
+      transparent 1px
+    )
+    0 0 / 40px 40px;
+
+  --bg-xless-dotted-light: radial-gradient(
+      color-mix(in oklch, var(--primary) 50%, transparent) 5%,
+      transparent 1px
+    )
+    0 0 / 40px 40px;
 }
 
 .dark {
@@ -239,15 +236,6 @@
     to {
       height: 0;
     }
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
 
