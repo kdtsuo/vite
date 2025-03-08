@@ -90,14 +90,14 @@ export default function IconLinkWide({
   );
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center relative">
       {user && deleteMode && (
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button
               size="icon"
-              variant="secondary"
-              className="size-8 rounded-full p-0 mr-3 cursor-pointer z-10"
+              variant="destructive"
+              className="absolute -top-2 -left-2 size-8 rounded-full p-0 z-10"
             >
               <X size={14} />
             </Button>

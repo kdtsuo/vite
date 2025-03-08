@@ -213,7 +213,7 @@ export default function QuickLinks() {
 
   return (
     <div
-      className={`flex flex-col space-y-4 w-full px-10 lg:mx-4 
+      className={`flex flex-col space-y-4 w-full px-4 lg:mx-4 
                   mt-5 md:max-w-1/2 justify-center m-auto md:mt-10`}
     >
       {user && (
