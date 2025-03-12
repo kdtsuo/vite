@@ -31,7 +31,11 @@ export default function Footer() {
         <div className="text-sm flex items-center justify-center space-x-2">
           <p>Made with ❤️ by</p>
           <span>
-            <a href="https://rinm.dev" target="_blank" rel="noreferrer">
+            <a
+              href="https://rinmeng.github.io"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img src={rmlogo} alt="rmlogo" className="w-16 h-auto mx-1" />
             </a>
           </span>
